@@ -47,7 +47,6 @@ DIR_RAW="/home/user/METASUB/0.raw"
 
 # The directories for output files (specify the absolute path. do not include the final '/')  
 # 配列ファイルを出力するディレクトリ（絶対パスで指定。最後にスラッシュ '/' は含めない）
-DIR_WORKING="/home/user/METASUB"
 DIR_QT="${DIR_WORKING}/1.trimmed"
 DIR_FA="${DIR_WORKING}/2.fasta"
 
