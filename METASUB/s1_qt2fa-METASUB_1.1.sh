@@ -69,18 +69,20 @@ for SAMPLE in "${LIST[@]}"; do
 	singularity exec ${FASTP} fastp\
 	--in1 ${DIR_RAW}/${SAMPLE}_Read1.fq.gz\
 	--in2 ${DIR_RAW}/${SAMPLE}_Read2.fq.gz\
-	--out1 ${DIR_QT}/${SAMPLE}_Read1.qt.fq.gz\
-	--out2 ${DIR_QT}/${SAMPLE}_Read2.qt.fq.gz\
+	--out1 ${DIR_QT}/${SAMPLE}_R1.qt.fq\
+	--out2 ${DIR_QT}/${SAMPLE}_R2.qt.fq\
 	--html ${DIR_QT}/${SAMPLE}.report.html\
 	--json ${DIR_QT}/${SAMPLE}.report.json\
 	-q 20 -t 1 -T 1 -l 20 -w 8
 	
 	# convert fastq to fasta
-	gunzip -c ${DIR_QT}/${SAMPLE}_Read1.qt.fq.gz | awk '(NR - 1) % 4 < 2' | sed 's/@/>/' > ${dir_tmp}/${SAMPLE}_R1.fa
-	gunzip -c ${DIR_QT}/${SAMPLE}_Read2.qt.fq.gz | awk '(NR - 1) % 4 < 2' | sed 's/@/>/' > ${dir_tmp}/${SAMPLE}_R2.fa
+	awk '(NR - 1) % 4 < 2' ${DIR_QT}/${SAMPLE}_R1.qt.fq | sed 's/@/>/' > ${dir_tmp}/${SAMPLE}_R1.fa
+	awk '(NR - 1) % 4 < 2' ${DIR_QT}/${SAMPLE}_R2.qt.fq | sed 's/@/>/' > ${dir_tmp}/${SAMPLE}_R2.fa
 	# interpose two fasta files (R1&R2) into one fasta file (R12).
 	cat ${dir_tmp}/${SAMPLE}_R1.fa ${dir_tmp}/${SAMPLE}_R2.fa > ${DIR_FA}/${SAMPLE}_R12.fa
 	rm ${dir_tmp}/${SAMPLE}_R1.fa ${dir_tmp}/${SAMPLE}_R2.fa
+ 	# gzip the filtered fastq file
+  	gzip ${DIR_QT}/${SAMPLE}_R1.qt.fq ${DIR_QT}/${SAMPLE}_R2.qt.fq
 	
 	# record the progress
 	DATE=$(date '+%Y-%m-%d %H:%M:%S %z')
