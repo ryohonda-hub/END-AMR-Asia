@@ -62,7 +62,7 @@ PY_SUM="${DIR_WORKING}/script/summary_reads_16S_ARG.py"
 
 ####### Run program #############################################################
 ## Listing the raw sequence files.
-if (LISTING - 1); then 
+if [ $LISTING -eq 1 ]; then 
 	# in case of sequential files
 	for ((i=0;i<=`expr $END - $START`;i++)); do
 		n=`expr $i + $START`; LIST[$i]="${PREFIX}${n}"
@@ -82,6 +82,7 @@ dir_rep="${DIR_16S}/reports"; mkdir -p ${DIR_16S} ${dir_rep} ${DIR_SUM}
 
 for SAMPLE in "${LIST[@]}"; do
 	## unzip fastq files 
+	#dir_tmp="${DIR_QT}/tmp"; mkdir -p ${dir_tmp}; trap 'rm -R ${dir_tmp}' 0
 	#gunzip -c ${DIR_QT}/${SAMPLE}_R1.qt.fq.gz > ${DIR_QT}/${SAMPLE}_R1.qt.fq
 	#gunzip -c ${DIR_QT}/${SAMPLE}_R2.qt.fq.gz > ${DIR_QT}/${SAMPLE}_R2.qt.fq
 	
