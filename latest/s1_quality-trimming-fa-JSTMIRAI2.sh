@@ -22,6 +22,17 @@ export SINGULARITY_BINDPATH="/home/user/JST-MIRAI"
 ####### Parameter setting ######################################################
 # Your working directory 自分の作業ディレクトリ
 DIR_WORKING="/home/user/JST-MIRAI"
+#----------------------------------------
+## The directory of raw sequence files (specify the absolute path. do not include the final '/') 
+## 配列生データのあるディレクトリ（絶対パスで指定。最後にスラッシュ '/' は含めない）
+DIR_RAW="/home/user/JST-MIRAI/0.raw"
+## The directory to output filtered sequence files
+## トリミング後の配列データを出力するディレクトリ（絶対パスで指定。最後にスラッシュ '/' は含めない）
+DIR_QT="/home/user/JST-MIRAI/1.trimmed"
+
+## Suffix of raw sequence files / Raw配列ファイルの語尾
+sfx_r1="_1.fastq" # suffix of read 1 of the paired-end sequence
+sfx_r2="_2.fastq" # suffix of read 2 of the paired-end sequence
 
 #----------------------------------------
 ## Choose listing method of sequence data files (choose 1 or 2)
@@ -45,18 +56,9 @@ PREFIX="DRR"
 START=270001
 END=270005
 #----------------------------------------
-## Suffix of raw sequence files / Raw配列ファイルの語尾
-sfx_r1="_1.fastq" # suffix of read 1 of the paired-end sequence
-sfx_r2="_2.fastq" # suffix of read 2 of the paired-end sequence
-#----------------------------------------
 
-## The directory of raw sequence files (specify the absolute path. do not include the final '/') 
-## 配列生データのあるディレクトリ（絶対パスで指定。最後にスラッシュ '/' は含めない）
-DIR_RAW="/home/user/JST-MIRAI/0.raw"
-
-## The directories for output files (specify the absolute path. do not include the final '/')  
-## 配列ファイルを出力するディレクトリ（絶対パスで指定。最後にスラッシュ '/' は含めない）
-DIR_QT="${DIR_WORKING}/1.trimmed"
+## The directory to output fasta files for blast(specify the absolute path. do not include the final '/')  
+## Blast用のFastaファイルを出力するディレクトリ（絶対パスで指定。最後にスラッシュ '/' は含めない）
 DIR_FA="${DIR_WORKING}/2.fasta"
 
 ## location of the container image for singularity 
