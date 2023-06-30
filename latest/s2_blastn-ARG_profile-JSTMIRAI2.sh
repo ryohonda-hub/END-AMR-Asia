@@ -75,7 +75,7 @@ BLAST="/usr/local/biotools/b/blast:2.9.0--pl526he19e7b1_7"
 
 ####### Run program #############################################################
 ## Listing the raw sequence files.
-if [ $LISTING -eq 1 ]; then 
+if [ $LISTING -eq 2 ]; then 
 	# in case of sequential files
 	for ((i=0;i<=`expr $END - $START`;i++)); do
 		n=`expr $i + $START`; LIST[$i]="${PREFIX}${n}"
