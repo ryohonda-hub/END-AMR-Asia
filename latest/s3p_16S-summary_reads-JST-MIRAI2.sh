@@ -62,7 +62,7 @@ PY_SUM="${DIR_WORKING}/script/summary_reads_16S_ARG.py"
 
 ####### Run program #############################################################
 ## Listing the raw sequence files.
-if [ $LISTING -eq 1 ]; then 
+if [ $LISTING -eq 2 ]; then 
 	# in case of sequential files
 	for ((i=0;i<=`expr $END - $START`;i++)); do
 		n=`expr $i + $START`; LIST[$i]="${PREFIX}${n}"
