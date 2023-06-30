@@ -88,8 +88,8 @@ for SAMPLE in "${LIST[@]}"; do
 	## quality trimming by fastp
 	singularity exec ${FASTP} \
 	fastp\
-	--in1 ${DIR_RAW}/${SAMPLE}${sfx_r1}\# 元の配列ファイルに合わせて変更
-	--in2 ${DIR_RAW}/${SAMPLE}${sfx_r2}\# 元の配列ファイルに合わせて変更
+	--in1 ${DIR_RAW}/${SAMPLE}${sfx_r1}\
+	--in2 ${DIR_RAW}/${SAMPLE}${sfx_r2}\
 	--out1 ${DIR_QT}/${SAMPLE}_R1.qt.fq\
 	--out2 ${DIR_QT}/${SAMPLE}_R2.qt.fq\
 	--html ${DIR_QT}/${SAMPLE}.report.html\
