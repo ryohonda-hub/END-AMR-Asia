@@ -56,19 +56,20 @@ pca_scores_df.loc['Explained Variance Ratio'] = explained_variance_ratio
 # 各成分の累積寄与率を追加
 pca_scores_df.loc['Cumulative Variance Ratio'] = np.cumsum(explained_variance_ratio)
 # csvファイル書き出し
-file_scores=os.path.join(dir_out,'pca_scores.'+os.path.splitext(os.path.basename(f_in))[0]+'.csv')
+sfx_scaling = ".scaling" if scaling else ".no_scaling"
+file_scores=os.path.join(dir_out,'pca_scores.'+os.path.splitext(os.path.basename(f_in))[0]+sfx_scaling+'.csv')
 pca_scores_df.to_csv(file_scores)
 print("["+args[0]+"] "+file_scores+" was created.")
 
 # 各成分の負荷量をCSVファイルに出力
 loadings_df = pd.DataFrame(loadings, index=params, columns=['PC{}'.format(i+1) for i in range(loadings.shape[1])])
 loadings_df=loadings_df.sort_values('PC1',ascending=False)
-file_loadings=os.path.join(dir_out, 'pca_loadings.'+os.path.splitext(os.path.basename(f_in))[0]+'.csv')
+file_loadings=os.path.join(dir_out, 'pca_loadings.'+os.path.splitext(os.path.basename(f_in))[0]+sfx_scaling+'.csv')
 loadings_df.to_csv(file_loadings)
 print("["+args[0]+"] "+file_loadings+" was created.")
 
 # Excelファイルに出力
-file_xlsx=os.path.join(dir_out, 'pca.'+os.path.splitext(os.path.basename(f_in))[0]+'.xlsx')
+file_xlsx=os.path.join(dir_out, 'pca.'+os.path.splitext(os.path.basename(f_in))[0]+sfx_scaling+'.xlsx')
 with pd.ExcelWriter(file_xlsx) as writer:
     pca_scores_df.to_excel(writer, sheet_name='PC scores')
     loadings_df.to_excel(writer, sheet_name='loadings')
@@ -112,6 +113,6 @@ plt.gca().spines['right'].set_visible(False)
 # Create a folder for saving the dendrogram
 os.makedirs(dir_out, exist_ok=True)
 # Save the dendrogram as an image file
-output_path = os.path.join(dir_out, 'dendrogram.'+os.path.splitext(os.path.basename(f_in))[0]+'.pdf')
+output_path = os.path.join(dir_out, 'hc.dendrogram.'+os.path.splitext(os.path.basename(f_in))[0]+'.pdf')
 plt.savefig(output_path)
 plt.show()

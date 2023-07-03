@@ -1,8 +1,8 @@
 #========================================================================
-# agg_ARG_profile.py / created by Ryo Honda, 2023-06-05
+# sum_ARG_profile.py / created by Ryo Honda, 2023-06-05
 #========================================================================
 # This python script creates a profile comparison table of multiple samples by:
-#	$ python3 agg_ARG_profile.py dir_in dir_out
+#	$ python3 sum_ARG_profile.py dir_in dir_out
 #
 # [IMPORTANT] The input file must be ".tsv" files
 #  dir_in = directory of sample data files. (all .tsv files in the directory will be merged.)
@@ -35,7 +35,7 @@ dir_in=args[1]
 dir_out=args[2]
 
 # get the file list in the input directory
-files_in=sorted(glob.glob(os.path.join(dir_in,"*.tsv")))
+files_in=sorted(glob.glob(os.path.join(dir_in,"*"+suffix)))
 
 # merge data from input files
 df_joined=pd.DataFrame()
@@ -54,20 +54,20 @@ for f in files_in:
 df_joined=df_joined.fillna(0)
 
 # create the output file
-file_out='merged.'+param+suffix
+file_out='_merged'+suffix[0:-4]+'.'+param+suffix[-4:]
 df_joined.to_csv(os.path.join(dir_out,file_out),sep='\t',index=False)
 print("["+args[0]+"] "+"Merged profile was created.")
 
 ######### Summation by args categories ###############################
-
+# list of the sample columns to aggregate
+col_sum=df_joined.columns[len(key)-len(df_joined.columns)-1:]
+# sum up by category
 for cat in cats:
     # sum up by the key 集計
-    df_sum=df_joined.groupby(cat).sum() 
-    # delete unnecessary columns 不要な列を削除
-    df_sum=df_sum.drop(df_sum.iloc[:,0:len(key)-2],axis=1) 
+    df_sum=df_joined.groupby(cat)[col_sum].sum() 
 
     # output the summary file.
-    file_out=cat.replace(' ','_')+"."+param+".sum.csv"
+    file_out="sum."+cat.replace(' ','_')+"."+param+".csv"
     df_sum.to_csv(os.path.join(dir_out,file_out))
     print("["+args[0]+"] "+file_out+" was created.")
 
