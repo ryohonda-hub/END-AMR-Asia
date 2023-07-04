@@ -8,7 +8,7 @@
 #  data.csv : data file in csv format (comma-delimited). 
 #   In the input csv, each sample data should be contained in each column.
 
-# The scrpit requires: pandas, numpy, scikit-learn, scipy, matplotlib, openpyxl
+# The script requires: pandas, numpy, scikit-learn, scipy, matplotlib, openpyxl
 #------------------------------------------------------------------------------
 import os
 import sys
@@ -109,10 +109,11 @@ plt.ylabel('Distance')
 plt.gca().spines['top'].set_visible(False)
 plt.gca().spines['bottom'].set_visible(False)
 plt.gca().spines['right'].set_visible(False)
+plt.subplots_adjust(left=0, right=1, bottom=0, top=1)
 
 # Create a folder for saving the dendrogram
 os.makedirs(dir_out, exist_ok=True)
 # Save the dendrogram as an image file
 output_path = os.path.join(dir_out, 'hc.dendrogram.'+os.path.splitext(os.path.basename(f_in))[0]+'.pdf')
-plt.savefig(output_path)
+plt.savefig(output_path, , bbox_inches='tight', pad_inches=0)
 plt.show()
