@@ -1,13 +1,13 @@
 #========================================================================
-# sum_ARG_profile.py / created by Ryo Honda, 2023-07-04
+# sum_MGE_profile.py / created by Ryo Honda, 2023-07-04
 #========================================================================
 # This python script creates a profile comparison table of multiple samples by:
-#	$ python3 sum_ARG_profile.py dir_in dir_out
+#	$ python3 sum_MGE_profile.py dir_in dir_out
 #
 # [IMPORTANT] The input file must be ".tsv" files
 #  dir_in = directory of sample data files. (all .tsv files in the directory will be merged.)
 #  dir_out = directory to output the data file
-#
+
 #  If the dir_in contains "sample_names.tsv", which has sequence names in the first column and  sample names in the second column, the columns of the output table are labelled with the corresponding sample names.
 #------------------------------------------------------------------------------
 import glob
@@ -20,22 +20,23 @@ import pandas as pd
 # 'param' =value data to be extracted from the sample data. 
 param='prop_RPK' 
 # 'key' = list of the index parameters to merge
-key=['ARO Accession','gene symbol','CARD Short Name', 'Drug Class', 'MAR', 'Resistance Mechanism', 'slen']
+key=['sseqid','MGEDB ID','gene symbol', 'Function', 'slen']
 # suffix of the sample data file. 
-suffix='.ARG_profile.tsv'
+suffix='.MGE_profile.tsv'
 # (Sample names in the output table are automatically named after the input file names by removing this suffix.)
 
 #======= Parameters for summation ========================
 # 'cats' = list of ARG categories to be summed up.
-cats=['MAR', 'Resistance Mechanism','gene symbol','CARD Short Name']
+cats=['gene symbol', 'Function']
 #=========================================================
 
+####### Creat a merged ARG profiles ###################################
 # import arguments 引数処理
 args=sys.argv
 dir_in=args[1]
 dir_out=args[2]
 
-# get the list of the profile files in the input directory
+# get the list of sequence files in the input directory
 files_in=sorted(glob.glob(os.path.join(dir_in,"*"+suffix)))
 # create the dictionary of sample names corresponding to sequence names
 if os.path.isfile(os.path.join(dir_in,"sample_names.tsv")):
@@ -44,7 +45,6 @@ if os.path.isfile(os.path.join(dir_in,"sample_names.tsv")):
 else:
     dic_sample=pd.DataFrame() # create an empty dataframe
 
-####### Creat a merged ARG profiles ###################################
 # merge data from input files
 df_joined=pd.DataFrame()
 key.append(param) # create the list of columns to output
@@ -62,13 +62,12 @@ for f in files_in:
 df_joined=df_joined.fillna(0)
 # rename the columns as sample name
 if not dic_sample.empty:
-    df_joined.rename(columns=dic_sample, inplace=True)
+    df_joined=df_joined.rename(columns=dic_sample)
 
 # create the output file
 file_out='_merged'+suffix[0:-4]+'.'+param+suffix[-4:]
 df_joined.to_csv(os.path.join(dir_out,file_out),sep='\t',index=False)
 print("["+args[0]+"] "+"Merged profile was created.")
-
 ######### Summation by args categories ###############################
 # list of the sample columns to aggregate
 col_sum=df_joined.columns[len(key)-len(df_joined.columns)-1:]
