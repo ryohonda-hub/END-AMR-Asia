@@ -20,8 +20,7 @@
 
 # ** specify the directory of other users if you need to refer from singularity.
 # **他のユーザのファイルをsingularityから参照する場合は次で指定 **必要ない場合は削除**
-export SINGULARITY_BINDPATH="/home/user/db"
-export SINGULARITY_BINDPATH="/home/user/JST-MIRAI"
+export SINGULARITY_BINDPATH="/home/user/db,/home/user/JST-MIRAI"
 
 ####### Parameter setting ######################################################
 # Your working directory 自分の作業ディレクトリ
