@@ -40,7 +40,7 @@ END=270005
 ## 配列データのあるディレクトリ（絶対パスで指定。最後のスラッシュ '/' は含めない）
 DIR_SEQ="/home/user/JST-MIRAI"
 DIR_QT="${DIR_SEQ}/1.trimmed" # directory of trimmed sequence and fastp reports
-DIR_ARG="${DIR_SEQ}/5.ARG_profile" # directory of ARG profile of each sample
+DIR_ARG="${DIR_WORKING}/5.ARG_profile" # directory of ARG profile of each sample
 rlen=150 # read length
 
 ## output directory 
