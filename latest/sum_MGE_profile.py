@@ -1,5 +1,5 @@
 #========================================================================
-# sum_MGE_profile.py / created by Ryo Honda, 2023-07-15
+# sum_MGE_profile.py / created by Ryo Honda, 2023-07-17
 #========================================================================
 # This python script creates a profile comparison table of multiple samples by:
 #	$ python3 sum_MGE_profile.py dir_in dir_out
@@ -8,7 +8,7 @@
 #  dir_in = directory of sample data files. (all .tsv files in the directory will be merged.)
 #  dir_out = directory to output the data file
 
-#  If the dir_in contains "sample_names.tsv", which has sequence names in the first column and  sample names in the second column, the columns of the output table are labelled with the corresponding sample names.
+#  If the dir_in contains "_sample_names.tsv", which has sequence names in the first column and  sample names in the second column, the columns of the output table are labelled with the corresponding sample names.
 #------------------------------------------------------------------------------
 import glob
 import os
@@ -25,6 +25,9 @@ key=['sseqid','MGEDB ID','gene symbol', 'Function', 'slen']
 suffix='.MGE_profile.tsv'
 # (Sample names in the output table are automatically named after the input file names by removing this suffix.)
 
+# name of the file containing list of sample names corresponding to sequence names
+# (list of allowable file names for compatibility)
+file_sample_name=['_sample_names.tsv','sample_names.tsv','_sample_name.tsv','sample_name.tsv']
 #======= Parameters for summation ========================
 # 'cats' = list of ARG categories to be summed up.
 cats=['gene symbol', 'Function']
@@ -39,18 +42,21 @@ dir_out=args[2]
 # get the list of sequence files in the input directory
 files_in=sorted(glob.glob(os.path.join(dir_in,"*"+suffix)))
 # create the dictionary of sample names corresponding to sequence names
-if os.path.isfile(os.path.join(dir_in,"sample_names.tsv")):
-    dic_sample=pd.read_table(os.path.join(dir_in,"sample_names.tsv"), header=None, index_col=0).squeeze(axis=1)
-    dic_sample.to_dict()
-else:
-    dic_sample=pd.DataFrame() # create an empty dataframe
+dic_sample=pd.DataFrame() # create an empty dataframe
+for f in file_sample_name:
+    if os.path.isfile(os.path.join(dir_in,f)):
+        dic_sample=pd.read_table(os.path.join(dir_in,f), header=None, index_col=0).squeeze(axis=1)
+        dic_sample.to_dict()
+        break
+    else:
+        pass
 
 # merge data from input files
 df_joined=pd.DataFrame()
 key.append(param) # create the list of columns to output
 for f in files_in: 
     df_sample=pd.read_table(f,header=0)
-    sample_name=os.path.basename(f).rstrip(suffix)
+    sample_name=os.path.basename(f).replace(suffix,"")
     df_sample=df_sample.reindex(columns=key).rename(columns={param: sample_name})
     if df_joined.empty:
         df_joined=df_sample # for the first data file
