@@ -1,5 +1,5 @@
 #========================================================================
-# sum_MGE_profile.py / created by Ryo Honda, 2023-07-17
+# sum_MGE_profile.py / created by Ryo Honda, 2023-07-19
 #========================================================================
 # This python script creates a profile comparison table of multiple samples by:
 #	$ python3 sum_MGE_profile.py dir_in dir_out
@@ -69,6 +69,10 @@ df_joined=df_joined.fillna(0)
 # rename the columns as sample name
 if not dic_sample.empty:
     df_joined=df_joined.rename(columns=dic_sample)
+# sort the row indices by sum of each row
+df_joined=df_joined.assign(sum=df_joined.sum(axis=1, numeric_only=True))
+df_joined.sort_values('sum',ascending=False, inplace=True)
+df_joined=df_joined.drop('sum', axis=1)
 
 # create the output file
 if not os.path.isdir(dir_out):
@@ -83,6 +87,10 @@ col_sum=df_joined.columns[len(key)-len(df_joined.columns)-1:]
 for cat in cats:
     # sum up by the key 集計
     df_sum=df_joined.groupby(cat)[col_sum].sum() 
+    # sort the row indices by sum of each row
+    df_sum=df_sum.assign(sum=df_sum.sum(axis=1, numeric_only=True))
+    df_sum.sort_values('sum',ascending=False, inplace=True)
+    df_sum=df_sum.drop('sum', axis=1)
 
     # output the summary file.
     file_out="MGE."+cat.replace(' ','_')+"."+param+".csv"

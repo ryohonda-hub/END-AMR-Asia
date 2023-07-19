@@ -1,5 +1,5 @@
 #========================================================================
-# sum_ARG_profile.py / created by Ryo Honda, 2023-07-17
+# sum_ARG_profile.py / created by Ryo Honda, 2023-07-19
 #========================================================================
 # This python script creates a profile comparison table of multiple samples by:
 #	$ python3 sum_ARG_profile.py dir_in dir_out
@@ -63,7 +63,7 @@ for f in files_in:
     else:
         df_joined=pd.merge(df_joined, df_sample, on=key[:-1], how='outer')
     print("["+args[0]+"] "+f+" merged.")
-    
+
 # fill out NaN with zero
 df_joined=df_joined.fillna(0)
 # rename the columns as sample name
@@ -84,6 +84,11 @@ col_sum=df_joined.columns[len(key)-len(df_joined.columns)-1:]
 for cat in cats:
     # sum up by the key 集計
     df_sum=df_joined.groupby(cat)[col_sum].sum() 
+    # sort the gene symbol 
+    if cat == 'gene symbol':
+        df_sum=df_sum.assign(sum=df_sum.sum(axis=1, numeric_only=True))
+        df_sum.sort_values('sum',ascending=False, inplace=True)
+        df_sum=df_sum.drop('sum', axis=1)
 
     # output the summary file.
     file_out="ARG."+cat.replace(' ','_')+"."+param+".csv"
