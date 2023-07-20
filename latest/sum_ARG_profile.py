@@ -1,5 +1,5 @@
 #========================================================================
-# sum_ARG_profile.py / created by Ryo Honda, 2023-07-19
+# sum_ARG_profile.py / created by Ryo Honda, 2023-07-21
 #========================================================================
 # This python script creates a profile comparison table of multiple samples by:
 #	$ python3 sum_ARG_profile.py dir_in dir_out
@@ -89,6 +89,7 @@ for cat in cats:
         df_sum=df_sum.assign(sum=df_sum.sum(axis=1, numeric_only=True))
         df_sum.sort_values('sum',ascending=False, inplace=True)
         df_sum=df_sum.drop('sum', axis=1)
+    df_sum=df_sum.T
 
     # output the summary file.
     file_out="ARG."+cat.replace(' ','_')+"."+param+".csv"

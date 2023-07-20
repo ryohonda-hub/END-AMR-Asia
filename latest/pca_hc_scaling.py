@@ -1,5 +1,5 @@
 #========================================================================
-# pca_hc_scaling.py / created by Ryo Honda, 2023-07-20
+# pca_hc_scaling.py / created by Ryo Honda, 2023-06-21
 #========================================================================
 # This python script perform principal component analysis and hierarchic cluster analysis by:
 #	$ python3 pca_hc_scaling.py data.csv dir_out
@@ -8,14 +8,14 @@
 #  data.csv : data file in csv format (comma-delimited). 
 #   In the input csv, each sample data should be contained in each column.
 
-# The script requires: pandas, numpy, scikit-learn, scipy, matplotlib, openpyxl
+# The scrpit requires: pandas, numpy, scikit-learn, scipy, matplotlib, openpyxl
 #------------------------------------------------------------------------------
 import os
 import sys
 import pandas as pd
 import numpy as np
-import openpyxl
 import matplotlib.pyplot as plt
+import openpyxl
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 from scipy.cluster.hierarchy import dendrogram, linkage
@@ -27,7 +27,6 @@ args=sys.argv
 f_in=args[1]; dir_out=args[2]
 # Load the CSV file / CSVファイルの読み込み
 data_in = pd.read_csv(f_in, header=0, index_col=0)
-data_in = data_in.transpose() # transpose rows and columns / 行列の入れ替え
 # Get sample names / サンプル名を取得
 samples = data_in.index
 params=data_in.columns
@@ -105,16 +104,16 @@ Z = linkage(X, method='ward')
 
 # Plot the dendrogram / 樹形図をプロット
 plt.figure(figsize=(10, 5))
-dendrogram(Z, labels=samples, color_threshold=0, above_threshold_color='k')
-plt.ylabel('Distance')
+dendrogram(Z, labels=samples, color_threshold=0, above_threshold_color='k',orientation='left')
+plt.xlabel('Distance')
 plt.gca().spines['top'].set_visible(False)
-plt.gca().spines['bottom'].set_visible(False)
+plt.gca().spines['left'].set_visible(False)
 plt.gca().spines['right'].set_visible(False)
-plt.subplots_adjust(left=0, right=1, bottom=0, top=1)
+plt.subplots_adjust(right=0.7)
 
 # Create a folder for saving the dendrogram
 os.makedirs(dir_out, exist_ok=True)
 # Save the dendrogram as an image file
 output_path = os.path.join(dir_out, 'hc.dendrogram.'+os.path.splitext(os.path.basename(f_in))[0]+'.pdf')
-plt.savefig(output_path, , bbox_inches='tight', pad_inches=0)
+plt.savefig(output_path, bbox_inches='tight', pad_inches=0)
 plt.show()
