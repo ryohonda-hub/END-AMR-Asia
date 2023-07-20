@@ -1,5 +1,5 @@
 #========================================================================
-# pca_hc_scaling.py / created by Ryo Honda, 2023-06-10
+# pca_hc_scaling.py / created by Ryo Honda, 2023-07-20
 #========================================================================
 # This python script perform principal component analysis and hierarchic cluster analysis by:
 #	$ python3 pca_hc_scaling.py data.csv dir_out
@@ -14,6 +14,7 @@ import os
 import sys
 import pandas as pd
 import numpy as np
+import openpyxl
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
