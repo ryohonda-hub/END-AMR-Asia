@@ -1,5 +1,5 @@
 #========================================================================
-# pca_hc_scaling.py / created by Ryo Honda, 2023-07-21
+# pca_hc_scaling.py / created by Ryo Honda, 2023-07-27
 #========================================================================
 # This python script perform principal component analysis and hierarchic cluster analysis by:
 #	$ python3 pca_hc_scaling.py data.csv dir_out
@@ -56,7 +56,7 @@ loadings = pca.components_.T * np.sqrt(pca.explained_variance_)  # PC loadings /
 
 # --- Output principal components and explained variance ratio as CSV files
 # prepare dataframe of PC scores. / 主成分のスコア値をdataframeに用意
-pca_scores_df = pd.DataFrame(pca_scores, columns=['PC{}'.format(i+1) for i in range(pca_scores.shape[0])], index=samples)
+pca_scores_df = pd.DataFrame(pca_scores, columns=['PC{}'.format(i+1) for i in range(len(data_num))], index=samples)
 # add explained variance / 各成分の寄与率を追加
 pca_scores_df.loc['Explained Variance Ratio'] = explained_variance_ratio
 # add cumulative explained variance / 各成分の累積寄与率を追加
@@ -68,7 +68,7 @@ pca_scores_df.to_csv(file_scores)
 print("["+args[0]+"] "+file_scores+" was created.")
 
 # output PC loadings in a csv file / 各成分の負荷量をCSVファイルに出力
-loadings_df = pd.DataFrame(loadings, index=params, columns=['PC{}'.format(i+1) for i in range(loadings.shape[1])])
+loadings_df = pd.DataFrame(loadings, index=params, columns=['PC{}'.format(i+1) for i in range(len(data_num))])
 loadings_df=loadings_df.sort_values('PC1',ascending=False)
 file_loadings=os.path.join(dir_out, 'pca_loadings.'+os.path.splitext(os.path.basename(f_in))[0]+sfx_scaling+'.csv')
 loadings_df.to_csv(file_loadings)
