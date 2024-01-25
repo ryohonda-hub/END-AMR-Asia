@@ -17,18 +17,18 @@
 
 ## ** specify the directory of other users if you need to refer.
 ## **他のユーザのファイルを参照する場合は次で指定 **必要ない場合は削除**
-export SINGULARITY_BINDPATH="/home/user/JST-MIRAI"
+export SINGULARITY_BINDPATH="/home/user/project"
 
 ####### Parameter setting ######################################################
 # Your working directory 自分の作業ディレクトリ
-DIR_WORKING="/home/user/JST-MIRAI"
+DIR_WORKING="/home/user/project"
 #----------------------------------------
 ## The directory of raw sequence files (specify the absolute path. do not include the final '/') 
 ## 配列生データのあるディレクトリ（絶対パスで指定。最後にスラッシュ '/' は含めない）
-DIR_RAW="/home/user/JST-MIRAI/0.raw"
+DIR_RAW="/home/user/project/0.raw"
 ## The directory to output filtered sequence files
 ## トリミング後の配列データを出力するディレクトリ（絶対パスで指定。最後にスラッシュ '/' は含めない）
-DIR_QT="/home/user/JST-MIRAI/1.trimmed"
+DIR_QT="/home/user/project/1.trimmed"
 
 ## Suffix of raw sequence files / Raw配列ファイルの語尾
 sfx_r1="_1.fastq" # suffix of read 1 of the paired-end sequence

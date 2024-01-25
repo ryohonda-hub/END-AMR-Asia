@@ -7,11 +7,11 @@
 
 # ** specify the directory of other users if you need to refer from singularity.
 # **他のユーザの配列ファイルをsingularityから参照する場合は次で指定 **必要ない場合は削除**
-export SINGULARITY_BINDPATH="/home/user/db,/home/user/JST-MIRAI"
+export SINGULARITY_BINDPATH="/home/user/db,/home/user/project"
 
 ####### Parameter setting ######################################################
 # Your working directory 自分の作業ディレクトリ
-DIR_WORKING="/home/user/JST-MIRAI"
+DIR_WORKING="/home/user/project"
 
 #----------------------------------------
 ## Choose listing method of sequence data files (choose 1 or 2)
@@ -38,7 +38,7 @@ END=270005
 
 ## the directory of raw sequence files (specify the absolute path. do not include the final '/')  
 ## 配列データのあるディレクトリ（絶対パスで指定。最後のスラッシュ '/' は含めない）
-DIR_SEQ="/home/user/JST-MIRAI"
+DIR_SEQ="/home/user/project"
 DIR_QT="${DIR_SEQ}/1.trimmed" # directory of trimmed sequence and fastp reports
 DIR_ARG="${DIR_WORKING}/5.ARG_profile" # directory of ARG profile of each sample
 rlen=150 # read length
