@@ -2,11 +2,11 @@
 # make_MGE_prof.py ver.2/ created by Ryo Honda, 2023-07-09
 #==============================================================================
 # This python script creates ARG profile data by merging gene information from the CARD catalog with read count data using ARO as index by:
-#	$ python3 make_MGE_prof2.py arg1 arg2 arg3
+#	$ python3 make_MGE_prof2.py catalog_file blast_results dir_out
 #
-#  arg1 = reference MGEDB catalog (MGE_tax_table_trim.txt)
-#  arg2 = a blast output file
-#  arg3 = output directory, or use "." to specify the current directory
+#  catalog_file = reference MGEDB catalog (MGE_tax_table_trim.txt)
+#  blast_results = a blast output file
+#  dir_out = output directory, or use "." to specify the current directory
 #
 # The blast output format should be in -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qlen slen".
 # The output file with suffix of ".MGE_profile.tsv" is created in the output directory. 
@@ -18,9 +18,12 @@ import sys
 import pandas as pd
 
 args=sys.argv
-df_catalog=pd.read_table(args[1],header=None)
-df_blast=pd.read_table(args[2],header=None)
+file_cat=args[1]
+file_blast=args[2]
 dir_out=args[3]
+
+df_catalog=pd.read_table(file_cat,header=0)
+df_blast=pd.read_table(file_blast,header=0)
 
 # remove empty columns in MGEDB catalog and define column titles.
 df_catalog=df_catalog.dropna(how='all', axis=1) 
@@ -59,7 +62,7 @@ df_prof=df_prof.sort_values('RPK',ascending=False)
 # create the output file
 if not os.path.exists(dir_out):
     os.makedirs(dir_out)
-file_out_base=os.path.splitext(os.path.basename(args[2]))[0].rstrip('.blast')
+file_out_base=os.path.splitext(os.path.basename(file_blast))[0].rstrip('.blast')
 
 df_out=df_prof_raw.reindex(columns=['sseqid','MGEDB ID', 'gene symbol','Function', 'gene name','slen','reads','RPK','prop_RPK'])
 file_out=os.path.join(dir_out,file_out_base+".MGE_profile.tsv")

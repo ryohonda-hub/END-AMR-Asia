@@ -80,27 +80,6 @@ with pd.ExcelWriter(file_xlsx) as writer:
     pca_scores_df.to_excel(writer, sheet_name='PC scores')
     loadings_df.to_excel(writer, sheet_name='loadings')
 
-## ---PCスコアと各パラメータの寄与度をプロット
-#fig, ax = plt.subplots(figsize=(10, 6))
-
-## PCスコアをプロット
-#ax.scatter(pca_scores[:, 0], pca_scores[:, 1])
-#ax.set_xlabel('PC1')
-#ax.set_ylabel('PC2')
-#ax.set_title('PCA - PC Scores')
-
-## 各成分の負荷量を矢印で示す
-#for i, (x, y) in enumerate(zip(pca_scores[:, 0], pca_scores[:, 1])):
-#    ax.text(pca_scores[i, 0] * 1.1, pca_scores[i,1] * 1.1, samples[i], color='black')
-#    ax.arrow(0, 0, loadings[0, i] * 10, loadings[1, i] * 10, color='r', alpha=0.5)
-#    ax.text(loadings[0, i] * 10.1, loadings[1, i] * 10.1, params[i], color='r')
-
-## Create a folder for saving the plot
-#os.makedirs(dir_out, exist_ok=True)
-## Save the plot as an image file
-#output_path = os.path.join(dir_out, 'pcaplot.'+os.path.splitext(os.path.basename(f_in))[0]+'.png')
-#plt.savefig(output_path)
-
 ## ------ Hierarchic cluster analysis -----
 # Prepare the data / データの準備
 X = data_in.values
