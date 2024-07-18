@@ -62,7 +62,7 @@ END=270005
 DIR_FA="${DIR_WORKING}/2.fasta"
 
 ## location of the container image for singularity 
-FASTP="/usr/local/biotools/f/fastp:0.23.3--h5f740d0_0"
+FASTP="/usr/local/biotools/f/fastp:0.23.4--h125f33a_4"
 
 ####### Run program #############################################################
 ## Listing the raw sequence files.
