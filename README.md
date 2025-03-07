@@ -5,7 +5,7 @@ The mission of END-AMR-Asia is to provide academic knowledge and opinions to mit
 ### Scripts for metagenomic ARG profiling in environment samples
 Scripts for profiling of antimicrobial resistome from metagenomic sequences are published here. The scripts used in our publications are available in the [pub](https://github.com/ryohonda-hub/END-AMR-Asia/tree/main/pub) directory. The latest scripts are available in the [latest](https://github.com/ryohonda-hub/END-AMR-Asia/tree/main/latest) directory. 
 
-All shell scripts are coded to work on the [NIG supercomputer] (https://sc.ddbj.nig.ac.jp/en/) but would work also on your system with slight modifications. The python scripts would work on most systems.
+All shell scripts are coded to work on the [NIG supercomputer](https://sc.ddbj.nig.ac.jp/en/) but would work also on your system with slight modifications. The python scripts would work on most systems.
 
 ### Citation
 When publishing work that uses these scripts, please cite the corresponding reference in the [pub](https://github.com/ryohonda-hub/END-AMR-Asia/tree/main/pub) directory or:
