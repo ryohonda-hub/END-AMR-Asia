@@ -58,6 +58,7 @@ def main(dir_in, dir_out):
         df_sample=df_sample[~df_sample[key[0]].str.contains('d__Eukaryota')]
         # calculate the relative abundance
         df_sample[param]=df_sample[param] / df_sample[param].sum()
+        df_sample[param] = df_sample[param].astype('float32') # to save memory
         # exclude the taxonomy with lower abundance than the threshold
         df_sample=df_sample[df_sample[param] > thres]
         # rename the column with the sequence file name
@@ -82,6 +83,9 @@ def main(dir_in, dir_out):
     df_taxon=df_taxon.replace('^[dpcofg]__',r'',regex=True) # remove class initials 
     df_taxon=df_taxon.fillna("-") 
     df_taxon.columns=['domain','phylum','class','order','family','genus']
+    # convert the data type of each column to the category (for saving memory)
+    for col in df_taxon.columns:
+        df_taxon[col] = df_taxon[col].astype('category')
     df_joined=pd.concat([df_taxon,df_joined],axis=1)
     
     # create the output file
@@ -105,7 +109,7 @@ def main(dir_in, dir_out):
     ## summary table for each taxonomy level
     for i, tx in enumerate(df_taxon.columns[1:]):
         df_pca=df_joined[df_joined[tx] != "-"] # remove unclassified rows
-        df_pca=df_pca.groupby(tx).sum(numeric_only=True)
+        df_pca=df_pca.groupby(tx, observed=False).sum(numeric_only=True)
         # re-calculate the abundance
         for s in df_pca.columns[1:]:
             df_pca[s]=df_pca[s]/df_pca[s].sum()

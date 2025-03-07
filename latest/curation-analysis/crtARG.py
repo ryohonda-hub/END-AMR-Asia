@@ -39,7 +39,7 @@ def main(dir_in, dir_out):
     'gene symbol': 'category',
     'CARD Short Name': 'category',
     'Drug Class': 'category',
-    'MAR': 'category',
+    'MAR': 'int8',
     'Resistance Mechanism': 'category',
     'slen': 'int32',
     param: 'float32'
