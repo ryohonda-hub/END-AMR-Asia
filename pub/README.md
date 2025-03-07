@@ -1,6 +1,6 @@
 # Script Repository for Published Works
 Scripts used in our publications are available here.
-Shell scripts are coded to work on the [NIG supercomputer] (https://sc.ddbj.nig.ac.jp/en/). To use them on your system, delete the lines starting with "singularity" and unnecessary header lines from the script.
+Shell scripts are coded to work on the [NIG supercomputer](https://sc.ddbj.nig.ac.jp/en/). To use them on your system, delete the lines starting with "singularity" and unnecessary header lines from the script.
 
 ## Publications citing the scripts
 ### GlobalAMR
