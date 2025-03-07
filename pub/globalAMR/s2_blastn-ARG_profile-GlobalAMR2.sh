@@ -1,12 +1,14 @@
-#!/bin/sh
-#$ -S /bin/sh
+#!/bin/bash
+#$ -S /bin/bash
 #$ -cwd
 #$ -o $HOME/log/
 #$ -e $HOME/log/
+#$ -l d_rt=240:00:00
+#$ -l s_rt=240:00:00
 #$ -pe def_slot 24
 
 #==============================================================================
-# blastn-ARG_profile, JST-MIRAI+global version / created by Ryo Honda, 2023-06-21
+# blastn-ARG_profile, JST-MIRAI+global version 2.0 / created by Ryo Honda, 2023-07-10
 # The shell script for NIG supercomputer (Grid Engine) 
 # with Singularity package of BioContainer
 #==============================================================================
@@ -14,17 +16,16 @@
 #  - gene symbol and family, read counts, RPK, drug class and resistance mechanism
 # This shell script recalls and requires: 
 # 1. blastn [to blast the sequences on CARD database], 
-# 2. count_blast_hits.pl [to count the reads of each ARG in the blast hits with >=90% of pident (% of identical positions) to >=25 bp of length], 
-# 3. lookup_gene_info.py [to look up the gene information from the CARD catalog, and add in the read count data.]
+# 2. make_ARG_prof2.py [to count the reads of each ARG in the blast hits with >=90% of pident (% of identical positions) to >=25 bp of length, and to look up the gene information from the CARD catalog, and add in the read count data.]
 #------------------------------------------------------------------------------
 
 # ** specify the directory of other users if you need to refer from singularity.
 # **他のユーザのファイルをsingularityから参照する場合は次で指定 **必要ない場合は削除**
-export SINGULARITY_BINDPATH="/home/user/db,/home/user/JST-MIRAI"
+#export SINGULARITY_BINDPATH="/home/user/db,/home/user/project"
 
 ####### Parameter setting ######################################################
 # Your working directory 自分の作業ディレクトリ
-DIR_WORKING="/home/user/JST-MIRAI"
+DIR_WORKING="/home/user/project"
 
 #----------------------------------------
 ## Choose listing method of sequence data files (choose 1 or 2)
@@ -36,7 +37,7 @@ LISTING="1"
 #----------------------------------------
 ## Case 1: Specify the text file of sequence list and newline code
 ## 1の場合: 配列名一覧のファイルと改行コードを指定
-FILE_LIST="${DIR_WORKING}/sralist.txt"
+FILE_LIST="${DIR_WORKING}/sralist-all.txt"
 IFS=$'\n' # '\n' for Mac/Unix, '\r\n' for Windows.
 ## [IMPORTANT] Specify the correct newline code in IFS. 
 ## 【重要】ファイルに使われている正しい改行コードをIFSに指定。
@@ -51,14 +52,13 @@ END=270005
 
 # Your working directory and the directory of query sequence files  (specify the absolute path. do not include the final '/')  
 # 配列データのあるディレクトリ（絶対パスで指定。最後のスラッシュ '/' は含めない）
-DIR_SEQ="/home/user/JST-MIRAI"
+DIR_SEQ="/home/user/project"
 DIR_QUERY="${DIR_SEQ}/2.fasta"
 
 # Output directory  (specify the absolute path. do not include the final '/') 
 # 結果出力するディレクトリ（絶対パスで指定。最後のスラッシュ '/' は含めない）
 DIR_BLAST="${DIR_WORKING}/3.blast_CARD"
-DIR_COUNT="${DIR_WORKING}/4.count"
-DIR_ARG="${DIR_WORKING}/5.ARG_profile"
+DIR_PROF="${DIR_WORKING}/5.ARG_profile"
 
 # Name of database to be specified in blast command 検索するデータベース名 (blastn で指定する値）
 # location of the database and ARO gene catalog データベースのあるディレクトリと，遺伝子情報カタログ(aro_index)
@@ -67,8 +67,7 @@ DIR_DB="/home/user/db/CARD-3.2.6"
 DB_CAT="aro_index.tsv"
 
 # location of the scripts for counting hits and matching gene information
-PL_COUNT="/home/user/JST-MIRAI/scripts/count_blast_hits.pl"
-PY_LKUP="/home/user/JST-MIRAI/scripts/make_ARG_profile.py"
+PY_LKUP="${DIR_WORKING}/scripts/make_ARG_prof2.py"
 # location of the container image for singularity 
 BLAST="/usr/local/biotools/b/blast:2.9.0--pl526he19e7b1_7"
 
@@ -91,7 +90,7 @@ DATE=$(date '+%Y-%m-%d %H:%M:%S %z')
 i=0; n=${#LIST[@]}
 echo "[${DATE}] $JOB_NAME started. (${i}/${n})"
 # make output directories if not existed
-mkdir -p ${DIR_BLAST} "${DIR_BLAST}/filtered" ${DIR_COUNT} ${DIR_ARG}
+mkdir -p ${DIR_BLAST} ${DIR_PROF}
 
 for SAMPLE in "${LIST[@]}"; do
 	# blastn
@@ -102,11 +101,9 @@ for SAMPLE in "${LIST[@]}"; do
 	-outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qlen slen"
 	
 	# exclude the blast results with pident <90% or length <25bp
-	awk '{if($3 >= 90 && $4 >= 25) print $0}' ${DIR_BLAST}/${SAMPLE}.blast.txt > ${DIR_BLAST}/filtered/${SAMPLE}.blast.filtered.txt
 	# count gene hits
-	perl ${PL_COUNT} ${DIR_BLAST}/filtered/${SAMPLE}.blast.filtered.txt > ${DIR_COUNT}/${SAMPLE}.count.tsv
 	# look up gene information in the CARD catalog
-	python3 ${PY_LKUP} ${DIR_DB}/${DB_CAT} ${DIR_COUNT}/${SAMPLE}.count.tsv ${DIR_ARG}
+	python3 ${PY_LKUP} ${DIR_DB}/${DB_CAT} ${DIR_BLAST}/${SAMPLE}.blast.txt ${DIR_PROF}
 	
 	# record the progress
 	DATE=$(date '+%Y-%m-%d %H:%M:%S %z')
