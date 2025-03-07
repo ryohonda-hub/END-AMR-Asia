@@ -1,0 +1,12 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+**/.Spotlight-V100
+**/.Trashes
+**/.fseventsd
+**/.VolumeIcon.icns
+._*
+**/.TemporaryItems/
+Icon?
+.com.apple.timemachine.donotpresent
