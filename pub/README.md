@@ -4,16 +4,16 @@ Shell scripts are coded to work on the [NIG supercomputer] (https://sc.ddbj.nig.
 
 ## Publications citing the scripts
 ### GlobalAMR
-compatible with the old NIG supercomputer system running GridEngine as its job scheduler.
+(compatible with the old NIG supercomputer system running GridEngine as its job scheduler)
 
 * Mardalisa, Rongxuan Wang, Muhammad Adnan Sabar, Norihisa Matsuura, Hiroe Hara-Yamamura, Ryo Honda* (2025) Different fates between extracellular and intracellular antimicrobial resistome in full-scale activated sludge and membrane bioreactor processes. Water Res. 274, 123155. [DOI: 10.1016/j.watres.2025.123155](https://doi.org/10.1016/j.watres.2025.123155)
 
 ### METASUB
-compatible with the old NIG supercomputer system running GridEngine as its job scheduler.
-* (in preparation)
+(compatible with the old NIG supercomputer system running GridEngine as its job scheduler)
+* in preparation
 
 ### JST-MIRAI
-compatible with the old NIG supercomputer system running GridEngine as its job scheduler.
+(compatible with the old NIG supercomputer system running GridEngine as its job scheduler)
 
 * Muhammad Adnan Sabar, Than Van Huy, Yoshinori Sugie, Hiroyuki Wada, Bo Zhao, Norihisa Matsuura, Masaru Ihara, Toru Watanabe, Hiroaki Tanaka, Ryo Honda* (2023) Antimicrobial resistome and mobilome in the urban river affected by combined sewer overflows and wastewater treatment effluent. J. Water Health 21(8), 1032-1050. [DOI: 10.2166/wh.2023.073](https://doi.org/10.2166/wh.2023.073)
 
