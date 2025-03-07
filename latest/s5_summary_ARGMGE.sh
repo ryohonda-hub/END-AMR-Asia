@@ -1,5 +1,6 @@
 #!/bin/bash
 
+rlen=150 # sequence read length
 ####### Parameter setting ######################################################
 # Your working directory 自分の作業ディレクトリ
 DIR_WORKING="/home/ryohonda/GlobalAMR"
@@ -11,7 +12,6 @@ DIR_QT="${DIR_SEQ}/1.qt" # directory of trimmed sequence and fastp reports
 DIR_ARG="${DIR_WORKING}/5.ARG_profile" # directory of ARG profile of each sample
 DIR_16S="${DIR_WORKING}/6.16S" # directory of 16S taxonomy of each sample
 DIR_MGE="${DIR_WORKING}/9.MGE_profile" # directory of MGE profile of each sample
-rlen=150 # read length
 
 ## output directory 
 ## 結果出力するディレクトリ（絶対パスで指定。最後のスラッシュ '/' は含めない）
