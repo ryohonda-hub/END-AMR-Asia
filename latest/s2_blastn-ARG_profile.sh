@@ -60,7 +60,7 @@ PY_LKUP="${DIR_WORKING}/scripts/make_ARG_prof2.py"
 #====== Singularity settings ==============================
 # Singularity: ** specify the directory of other users if you need to refer from singularity.
 # Singularity: **他のユーザのファイルをsingularityから参照する場合は次で指定 **必要ない場合は削除**
-export SINGULARITY_BINDPATH="/home/ryohonda/db,${DIR_SEQ}"
+export SINGULARITY_BINDPATH="${DIR_DB},${DIR_SEQ}"
 ## Singularity: location of the container image for singularity 
 BLAST="/usr/local/biotools/b/blast:2.9.0--pl526he19e7b1_7"
 #==========================================================

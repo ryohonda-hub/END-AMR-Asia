@@ -33,7 +33,17 @@ def main(dir_in, dir_out):
     # 'cats' = list of ARG categories to be summed up.
     cats=['MAR', 'Resistance Mechanism','gene symbol','CARD Short Name']
     #=========================================================
-    
+    # specify data type of the dataframe
+    dtype_dict = {
+    'ARO Accession': 'category',
+    'gene symbol': 'category',
+    'CARD Short Name': 'category',
+    'Drug Class': 'category',
+    'MAR': 'category',
+    'Resistance Mechanism': 'category',
+    'slen': 'int32',
+    param: 'float32'
+    }
     # get the list of the profile files in the input directory
     files_in=sorted(glob.glob(os.path.join(dir_in,"*"+suffix)))
     # create the dictionary of sample names corresponding to sequence names
@@ -45,13 +55,13 @@ def main(dir_in, dir_out):
             break
         else:
             pass
-    
+
     ####### Creat a merged ARG profiles ###################################
     # merge data from input files
     df_joined=pd.DataFrame()
     key.append(param) # create the list of columns to output
     for f in files_in: 
-        df_sample=pd.read_table(f,header=0)
+        df_sample=pd.read_table(f,header=0, dtype=dtype_dict)
         sample_name=os.path.basename(f).replace(suffix,"")
         df_sample=df_sample.reindex(columns=key).rename(columns={param: sample_name})
         if df_joined.empty:
