@@ -32,7 +32,9 @@ def main(dir_in, dir_out):
     # (list of allowable file names for compatibility)
     file_sample_name=['_sample_names.tsv','sample_names.tsv','_sample_name.tsv','sample_name.tsv']
     #======================================================
-    
+    # specify data type of the dataframe
+    dtype_dict = {'taxonomy': 'category', param: 'float32'}
+
     # get the list of the profile files in the input directory
     files_in=sorted(glob.glob(os.path.join(dir_in,"*"+suffix)))
     # create the dictionary of sample names corresponding to sequence names
@@ -50,7 +52,7 @@ def main(dir_in, dir_out):
     df_joined=pd.DataFrame()
     key.append(param) # create the list of columns to output
     for f in files_in: 
-        df_sample=pd.read_table(f,header=None, index_col=False)
+        df_sample=pd.read_table(f,header=None, index_col=False, dtype=dtype_dict)
         df_sample.columns=key
         # Remove Eukaryota domain
         df_sample=df_sample[~df_sample[key[0]].str.contains('d__Eukaryota')]

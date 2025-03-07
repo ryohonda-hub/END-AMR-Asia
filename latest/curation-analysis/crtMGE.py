@@ -33,7 +33,15 @@ def main(dir_in, dir_out):
     # 'cats' = list of ARG categories to be summed up.
     cats=['gene symbol', 'Function']
     #=========================================================
-    
+    # specify data type of the dataframe
+    dtype_dict = {
+    'sseqid': 'category',
+    'MGEDB ID': 'category',
+    'gene symbol': 'category',
+    'Function': 'category',
+    'slen': 'int32',
+    param: 'float32'
+    }
     ####### Creat a merged ARG profiles ###################################    
     # get the list of sequence files in the input directory
     files_in=sorted(glob.glob(os.path.join(dir_in,"*"+suffix)))
@@ -51,7 +59,7 @@ def main(dir_in, dir_out):
     df_joined=pd.DataFrame()
     key.append(param) # create the list of columns to output
     for f in files_in: 
-        df_sample=pd.read_table(f,header=0)
+        df_sample=pd.read_table(f,header=0, dtype=dtype_dict)
         sample_name=os.path.basename(f).replace(suffix,"")
         df_sample=df_sample.reindex(columns=key).rename(columns={param: sample_name})
         if df_joined.empty:
