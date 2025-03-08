@@ -2,7 +2,7 @@
 # make_MGE_prof.py ver.2.1 / created by Ryo Honda, Last updated: 2025-03-07
 #==============================================================================
 # This python script creates ARG profile data by merging gene information from the CARD catalog with read count data using ARO as index by:
-#	$ python3 make_MGE_prof2.py catalog_file blast_results dir_out
+#	$ python3 makeMGEprof.py catalog_file blast_results dir_out
 #
 #  catalog_file = reference MGEDB catalog (MGE_tax_table_trim.txt)
 #  blast_results = a blast output file

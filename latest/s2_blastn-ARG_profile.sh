@@ -8,7 +8,7 @@
 #  - gene symbol and family, read counts, RPK, drug class and resistance mechanism
 # This shell script recalls and requires: 
 # 1. blastn [to blast the sequences on CARD database], 
-# 2. make_ARG_prof2.py [to count the reads of each ARG in the blast hits with pident (% of identical positions) or matching length below the cutoff thresholds, and to look up the gene information from the CARD catalog, and add in the read count data.]
+# 2. makeARGprof.py [to count the reads of each ARG in the blast hits with pident (% of identical positions) or matching length below the cutoff thresholds, and to look up the gene information from the CARD catalog, and add in the read count data.]
 #------------------------------------------------------------------------------
 
 threads=24 # CPU threads / スレッド数
@@ -55,7 +55,7 @@ DB="CARD-3.2.6"
 DIR_DB="/home/ryohonda/db/CARD-3.2.6"
 DB_CAT="aro_index.tsv"
 ## location of the scripts for counting hits and matching gene information
-PY_LKUP="${DIR_WORKING}/scripts/make_ARG_prof2.py"
+PY_LKUP="${DIR_WORKING}/scripts/makeARGprof.py"
 
 #====== Singularity settings ==============================
 # Singularity: ** specify the directory of other users if you need to refer from singularity.
