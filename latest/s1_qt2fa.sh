@@ -60,7 +60,7 @@ FASTP="/usr/local/biotools/f/fastp:0.23.4--h125f33a_4"
 ## Listing the raw sequence files.
 if [ $LISTING -eq 0 ]; then 
 	# Case 0: get the sample list from the fastq file list of the directory 
-	LIST=(`ls ${DIR_RAW}/*.fq ${DIR_RAW}/*.fastq | \
+	LIST=(`ls ${DIR_RAW}/*${sfx_r1} ${DIR_RAW}/*${sfx_r2} | \
 	sed -E "s/(${sfx_r1}|${sfx_r2})$//" | sort -u`)
 else
 	# Case 1: get the list from a file. 

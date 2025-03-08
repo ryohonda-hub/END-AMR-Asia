@@ -19,8 +19,8 @@ import pandas as pd
 
 def main(file_cat, file_blast, dir_out):
     # cutoff conditions of the blast result
-    th_mlen=100     # (bp) length of the matched sequence below this value will be excluded.
-    th_pident=90   # (%) the pident below this value will be excluded.
+    th_mlen=100     # (bp) hits with matched length below this value are excluded.
+    th_pident=90    # (%) hits with pident below this value are excluded.
     # import the database catalog and blast results
     df_catalog=pd.read_table(file_cat,header=0)
     df_blast=pd.read_table(file_blast,header=0)
