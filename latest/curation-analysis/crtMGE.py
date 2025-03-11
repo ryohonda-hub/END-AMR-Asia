@@ -50,7 +50,7 @@ def main(dir_in, dir_out):
     for f in file_sample_name:
         if os.path.isfile(os.path.join(dir_in,f)):
             dic_sample=pd.read_table(os.path.join(dir_in,f), header=None, index_col=0).squeeze(axis=1)
-            dic_sample.to_dict()
+            dic_sample=dic_sample.to_dict()
             break
         else:
             pass
@@ -71,7 +71,7 @@ def main(dir_in, dir_out):
     # fill out NaN with zero
     df_joined=df_joined.fillna(0)
     # rename the columns as sample name
-    if not dic_sample.empty:
+    if dic_sample:
         df_joined=df_joined.rename(columns=dic_sample)
     # sort the row indices by sum of each row
     df_joined=df_joined.assign(sum=df_joined.sum(axis=1, numeric_only=True))
