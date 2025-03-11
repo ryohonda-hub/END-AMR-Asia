@@ -1,5 +1,5 @@
 #========================================================================
-# curate_16S_taxon.py ver.2 / created by Ryo Honda, Last updated: 2023-07-21
+# curate_16S_taxon.py ver.2 / created by Ryo Honda, Last updated: 2025-03-11
 #========================================================================
 # This python script creates a profile comparison table of multiple samples from mpa-style taxonomy read-count data by:
 #	$ python3 crt16S.py dir_in dir_out
@@ -45,7 +45,8 @@ def main(dir_in, dir_out):
             dic_sample=dic_sample.to_dict()
             break
         else:
-            pass
+            print("Warning: _sample_names.csv is not found.")
+            dic_sample={}
     
     ####### Creat a merged ARG profiles ###################################
     # merge data from input files
@@ -71,8 +72,10 @@ def main(dir_in, dir_out):
             df_joined=pd.merge(df_joined, df_sample, on=key[:-1], how='outer', copy=False)
         print("["+args[0]+"] "+f+" merged.")
         
-    # fill out NaN with zero
-    df_joined=df_joined.fillna(0)
+    # fill out NaN with zero (for the numeric columns only)
+    #df_joined=df_joined.fillna(0)
+    df_joined[df_joined.select_dtypes(include=['number']).columns] = df_joined.select_dtypes(include=['number']).fillna(0)
+
     # rename the columns as sample name
     if dic_sample:
         df_joined.rename(columns=dic_sample, inplace=True)

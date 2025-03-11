@@ -1,5 +1,5 @@
 #========================================================================
-# curate_drug_class.py / created by Ryo Honda, 2023-08-04
+# curate_drug_class.py / created by Ryo Honda, Last updated: 2025-03-11
 #========================================================================
 # This python script creates a summary table of sequence reads by:
 #	$ python3 crtDrugClass.py summary_reads.csv dir_arg dir_out
@@ -45,7 +45,8 @@ def main(file_reads, dir_in, dir_out):
             dic_sample=dic_sample.to_dict()
             break
         else:
-            pass
+            print("Warning: _sample_names.csv is not found.")
+            dic_sample={}
     #======================================================
     
     ## Summarize ARG profile data
