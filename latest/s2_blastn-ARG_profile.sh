@@ -1,5 +1,5 @@
 #!/bin/bash
-JOB_NAME=$SLURM_JOB_NAME # only for Slurm job scheduler
+JOB_NAME="${SLURM_JOB_NAME}" # any job name for your reference
 #==============================================================================
 # blastn-ARG_profile, version 3.0 / created by Ryo Honda, Last updated: 2025-03-14
 # The shell script for NIG supercomputer with the Singularity package of BioContainer

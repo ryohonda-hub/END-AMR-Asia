@@ -1,7 +1,7 @@
 #!/bin/bash
-JOB_NAME=$SLURM_JOB_NAME # only for Slurm job scheduler
+JOB_NAME="${SLURM_JOB_NAME}" # any job name for your reference
 #==============================================================================
-# summarize sequence reads information (ARG, MGE and 16S) / created by Ryo Honda, 2025-03-14
+# summarize sequence reads information (ARG, MGE and 16S) / created by Ryo Honda, Last updated: 2025-03-14
 #==============================================================================
 # This shell script creates a summary table of sequence reads of each sample including:
 #  - the number of raw reads, quality reads, total 16S reads, total ARG reads, and total MGE reads

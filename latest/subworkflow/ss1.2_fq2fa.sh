@@ -1,7 +1,7 @@
 #!/bin/bash
-JOB_NAME=$SLURM_JOB_NAME # only for Slurm job scheduler
+JOB_NAME="${SLURM_JOB_NAME}" # any job name for your reference
 #========================================
-# Convert fastq files to concatenated fasta files
+# Convert fastq files to concatenated fasta files / created by Ryo Honda, Last updated: 2025-03-14
 #
 # 1. All fastq files in a specified directory will be converted to fasta format
 # 2. Paired-end fasta files are concatenated into one fasta file.
