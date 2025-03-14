@@ -1,6 +1,6 @@
 #!/bin/bash
 #==============================================================================
-# qt2fa-AMR ver.2 / created by Ryo Honda, 2025-03-07
+# qt2fa-AMR ver.2 / created by Ryo Honda, 2025-03-14
 # The shell script for NIG supercomputer
 # with Singularity package of BioContainer
 #==============================================================================
@@ -49,7 +49,7 @@ IFS=$'\n' # '\n' for Mac/Unix, '\r\n' for Windows.
 ##  UNIX/Mac uses LF(\n); Windows uses CR+LF (\r\n)
 #----------------------------------------
 
-#====== Singularity settings ==============================
+#====== Appcontainer (Singularity) settings ==============================
 ## Singularity: ** specify the directory of other users if you need to refer.
 ## Singularity: **他のユーザのファイルを参照する場合は次で指定 **必要ない場合は削除**
 export SINGULARITY_BINDPATH="${DIR_WORKING}"

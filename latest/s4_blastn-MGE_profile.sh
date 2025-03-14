@@ -1,6 +1,6 @@
 #!/bin/bash
 #==============================================================================
-# blastn-MBE_profile, version 2.1 / created by Ryo Honda, 2025-03-07
+# blastn-MBE_profile, version 2.1 / created by Ryo Honda, 2025-03-14
 # The shell script for NIG supercomputer
 # with Singularity package of BioContainer
 #==============================================================================

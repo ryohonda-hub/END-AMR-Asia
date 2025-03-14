@@ -1,6 +1,6 @@
 #!/bin/bash
 #==============================================================================
-# blastn-ARG_profile, version 3.0 / created by Ryo Honda, 2025-03-07
+# blastn-ARG_profile, version 3.0 / created by Ryo Honda, 2025-03-14
 # The shell script for NIG supercomputer 
 # with Singularity package of BioContainer
 #==============================================================================
