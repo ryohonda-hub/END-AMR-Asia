@@ -1,4 +1,12 @@
 #!/bin/bash
+JOB_NAME=$SLURM_JOB_NAME # only for Slurm job scheduler
+#==============================================================================
+# summarize sequence reads information (ARG, MGE and 16S) / created by Ryo Honda, 2025-03-14
+#==============================================================================
+# This shell script creates a summary table of sequence reads of each sample including:
+#  - the number of raw reads, quality reads, total 16S reads, total ARG reads, and total MGE reads
+# This shell script recalls and requires "summary_reads_16S_ARG_MGE.py"
+#------------------------------------------------------------------------------
 
 rlen=150 # sequence read length
 ####### Parameter setting ######################################################

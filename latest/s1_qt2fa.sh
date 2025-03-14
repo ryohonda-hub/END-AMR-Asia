@@ -1,15 +1,15 @@
 #!/bin/bash
+JOB_NAME=$SLURM_JOB_NAME # only for Slurm job scheduler
 #==============================================================================
-# qt2fa-AMR ver.2 / created by Ryo Honda, 2025-03-14
-# The shell script for NIG supercomputer
-# with Singularity package of BioContainer
+# qt2fa-AMR ver.2 / created by Ryo Honda, Last updated: 2025-03-14
+# The shell script for NIG supercomputer with the Singularity package of BioContainer
 #==============================================================================
 # This shell script creates fasta files for ARG database search from shotgun sequences by: 
 # 1. quality trimming by fastp, 
 # 2. merging paired-end sequences into one fasta file (without matching pairs).
 #------------------------------------------------------------------------------
 
-threads=8 # CPU threds / スレッド数
+threads=8 # CPU threads / スレッド数
 ####### Parameter setting ######################################################
 # Your working directory 作業ディレクトリ（配列データが格納されている場所）
 DIR_WORKING="/home/ryohonda/GlobalAMR"
@@ -49,11 +49,11 @@ IFS=$'\n' # '\n' for Mac/Unix, '\r\n' for Windows.
 ##  UNIX/Mac uses LF(\n); Windows uses CR+LF (\r\n)
 #----------------------------------------
 
-#====== Appcontainer (Singularity) settings ==============================
+#====== Singularity (AppContainer) settings ==============================
 ## Singularity: ** specify the directory of other users if you need to refer.
 ## Singularity: **他のユーザのファイルを参照する場合は次で指定 **必要ない場合は削除**
 export SINGULARITY_BINDPATH="${DIR_WORKING}"
-## Singularity: paths of the container image for singularity 
+## Singularity: location of the container image of the singularity package
 FASTP="/usr/local/biotools/f/fastp:0.23.4--h125f33a_4"
 
 ####### Run program #############################################################
@@ -90,7 +90,7 @@ for SAMPLE in "${LIST[@]}"; do
 	## convert fastq to fasta
 	awk '(NR - 1) % 4 < 2' ${DIR_QT}/${SAMPLE}_R1.qt.fq | sed 's/@/>/' > ${dir_tmp}/${SAMPLE}_R1.fa
 	awk '(NR - 1) % 4 < 2' ${DIR_QT}/${SAMPLE}_R2.qt.fq | sed 's/@/>/' > ${dir_tmp}/${SAMPLE}_R2.fa
-	## interpose two fasta files (R1&R2) into one fasta file (R12).
+	## concatenate two fasta files (R1&R2) into one fasta file (R12).
 	cat ${dir_tmp}/${SAMPLE}_R1.fa ${dir_tmp}/${SAMPLE}_R2.fa > ${DIR_FA}/${SAMPLE}_R12.fa
 	#gzip the filtered fastq file
 	#singularity exec /usr/local/biotools/p/pigz:2.3.4\

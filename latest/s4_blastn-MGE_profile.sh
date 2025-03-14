@@ -1,13 +1,13 @@
 #!/bin/bash
+JOB_NAME=$SLURM_JOB_NAME # only for Slurm job scheduler
 #==============================================================================
-# blastn-MBE_profile, version 2.1 / created by Ryo Honda, 2025-03-14
-# The shell script for NIG supercomputer
-# with Singularity package of BioContainer
+# blastn-MBE_profile, version 2.1 / created by Ryo Honda, Last updated: 2025-03-14
+# The shell script for NIG supercomputer with the Singularity package of BioContainer
 #==============================================================================
 # This shell script creates MGE profile data including:
 #  - gene symbol and family, read counts, RPK, drug class and resistance mechanism
 # This shell script recalls and requires: 
-# 1. blastn [to blast the sequences on MGE database], 
+# 1. blastn [to identify MGEs using the MGE database], 
 # 2. makeMGEprof.py [to count the reads of each MGE in the blast hits with pident (% of identical positions) or matching length below the cutoff thresholds, and to look up the gene information from the MGEDB catalog, and add in the read count data.]
 #------------------------------------------------------------------------------
 
@@ -57,11 +57,11 @@ DB_CAT="MGE_tax_table_trim.txt"
 ## location of the scripts for counting hits and matching gene information
 PY_LKUP="${DIR_WORKING}/scripts/makeMGEprof.py"
 
-#====== Singularity settings ==============================
+#====== Singularity  (AppContainer) settings ==============================
 # Singularity: ** specify the directory of other users if you need to refer from singularity.
 # Singularity: **他のユーザのファイルをsingularityから参照する場合は次で指定 **必要ない場合は削除**
 export SINGULARITY_BINDPATH="${DIR_DB},${DIR_SEQ}"
-## Singularity: location of the container image for singularity 
+## Singularity: location of the container image of the singularity package
 BLAST="/usr/local/biotools/b/blast:2.9.0--pl526he19e7b1_7"
 #==========================================================
 

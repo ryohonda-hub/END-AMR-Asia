@@ -1,4 +1,16 @@
 #!/bin/bash
+JOB_NAME=$SLURM_JOB_NAME # only for Slurm job scheduler
+#==============================================================================
+# Taxonomy analysis and sequence reads summary / created by Ryo Honda, 2025-03-14
+# The shell script for NIG supercomputer with the Singularity package of BioContainer
+#==============================================================================
+# This shell script creates taxonomy profile tables and a summary table of sequence reads, including:
+#  - 16S-based taxonomy composition tables of each sample
+#  - a table on the number of raw reads, quality reads, total 16S reads, and total ARG reads
+# # This shell script recalls and requires: 
+# 1. Kraken2 and Bracken2 [for taxonomy analysis using the SILVA database], 
+# 2. summary_reads_16S_ARG.py [to creates a summary table of sequence reads]
+#------------------------------------------------------------------------------
 
 threads=24	# CPU threads / スレッド数
 rlen=150	# read length
@@ -48,11 +60,11 @@ DIR_DB="/home/ryohonda/db/SILVA-138_k2"
 ## location of the python script
 PY_SUM="${DIR_WORKING}/scripts/summary_reads_16S_ARG.py"
 
-#====== Singularity settings ==============================
+#====== Singularity (AppContainer) settings ==============================
 # Singularity: ** specify the directory of other users if you need to refer from singularity.
 # Singularity: **他のユーザのファイルをsingularityから参照する場合は次で指定 **必要ない場合は削除**
 export SINGULARITY_BINDPATH="/home/ryohonda/db,${DIR_SEQ}"
-## Singularity: location of the target package in singularity 
+## Singularity: location of the container images of the singularity package
 KRAKEN2="/usr/local/biotools/k/kraken2:2.1.2--pl5321h9f5acd7_3"
 BRACKEN="/usr/local/biotools/b/bracken:2.8--py39hc16433a_0"
 #==========================================================
