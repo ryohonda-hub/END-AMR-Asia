@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --output=$HOME/log/%x_%j.out
-#SBATCH --error=$HOME/log/%x_%j.err
+#SBATCH --output=/home/your_username/log/%x_%j.out
+#SBATCH --error=/home/your_username/log/%x_%j.err
 #SBATCH -N 1-1 
 #SBATCH -n 24
 #SBATCH -t 13-23:59:59
