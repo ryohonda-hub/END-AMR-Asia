@@ -69,7 +69,7 @@ BLAST="/usr/local/biotools/b/blast:2.9.0--pl526he19e7b1_7"
 ## Listing the raw sequence files.
 if [ $LISTING -eq 0 ]; then 
 	# Case 0: get the sample list from the fastq file list of the directory 
-	LIST=(`ls ${DIR_QUERY}/*${sfx_fa} | sed -E "s/${sfx_fa}$//" | sort -u`)
+	LIST=($(ls ${DIR_QUERY}/*${sfx_fa} | sed -E "s/${sfx_fa}$//" | xargs -n 1 basename | sort -u))
 else
 	# Case 1: get the list from a file. 
 	LIST=(`cat ${FILE_LIST}`)

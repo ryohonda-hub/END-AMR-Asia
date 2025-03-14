@@ -61,8 +61,8 @@ BRACKEN="/usr/local/biotools/b/bracken:2.8--py39hc16433a_0"
 ## Listing the raw sequence files.
 if [ $LISTING -eq 0 ]; then 
 	# Case 0: get the sample list from the fastq file list of the directory 
-	LIST=(`ls ${DIR_QT}/*${sfx_r1} ${DIR_QT}/*${sfx_r2} | \
-	sed -E "s/(${sfx_r1}|${sfx_r2})$//" | sort -u`)
+	LIST=($(ls ${DIR_QT}/*${sfx_r1} ${DIR_QT}/*${sfx_r2} | sed -E "s/(${sfx_r1}|${sfx_r2})$//" | \
+	xargs -n 1 basename | sort -u))
 else
 	# Case 1: get the list from a file. 
 	LIST=(`cat ${FILE_LIST}`)
