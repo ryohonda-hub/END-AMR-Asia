@@ -1,7 +1,7 @@
 #!/bin/bash
 JOB_NAME=$SLURM_JOB_NAME # only for Slurm job scheduler
 #==============================================================================
-# Taxonomy analysis and sequence reads summary / created by Ryo Honda, 2025-03-14
+# Taxonomy analysis and sequence reads summary / created by Ryo Honda, Last updated: 2025-03-14
 # The shell script for NIG supercomputer with the Singularity package of BioContainer
 #==============================================================================
 # This shell script creates taxonomy profile tables and a summary table of sequence reads, including:
