@@ -63,7 +63,7 @@ PY_SUM="${DIR_WORKING}/scripts/summary_reads_16S_ARG.py"
 #====== Singularity (AppContainer) settings ==============================
 # Singularity: ** specify the directory of other users if you need to refer from singularity.
 # Singularity: **他のユーザのファイルをsingularityから参照する場合は次で指定 **必要ない場合は削除**
-export SINGULARITY_BINDPATH="/home/ryohonda/db,${DIR_SEQ}"
+export SINGULARITY_BINDPATH="${DIR_DB},${DIR_SEQ}"
 ## Singularity: location of the container images of the singularity package
 KRAKEN2="/usr/local/biotools/k/kraken2:2.1.2--pl5321h9f5acd7_3"
 BRACKEN="/usr/local/biotools/b/bracken:2.8--py39hc16433a_0"
