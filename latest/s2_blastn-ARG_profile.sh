@@ -19,7 +19,7 @@ DIR_WORKING="/home/ryohonda/GlobalAMR"
 # Sample list
 ## Choose listing method of sequence data files (choose 0 or 1)
 ## 配列ファイルリストの指定方法 (0か1を選択）
-LISTING="0" 
+LISTING="1" 
 #----------------------------------------
 # 0: to use all the raw files in the directory specified as DIR_RAW above.
 #	 DIR_RAWで指定したディレクトリーのすべてのファイルを使用する。
@@ -29,7 +29,7 @@ LISTING="0"
 #
 ## For Case 1: Specify the text file of sequence list and newline code
 ## 1の場合: 配列名一覧のファイルと改行コードを指定
-FILE_LIST="${DIR_WORKING}/sralist-all.txt"
+FILE_LIST="${DIR_WORKING}/sralist.txt"
 IFS=$'\n' # '\n' for Mac/Unix, '\r\n' for Windows.
 ## [IMPORTANT] Specify the correct newline code in IFS. 
 ## 【重要】ファイルに使われている正しい改行コードをIFSに指定。
