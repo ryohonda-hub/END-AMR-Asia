@@ -47,11 +47,11 @@ sfx_r2="_R2.qt.fq" # suffix of read 2 of the quality paired-end sequence
 ## 配列データのあるディレクトリ（絶対パスで指定。最後のスラッシュ '/' は含めない）
 DIR_SEQ="/home/ryohonda/sequence"
 DIR_QT="${DIR_SEQ}/1.qt" # directory of trimmed sequence and fastp reports
-DIR_ARG="${DIR_WORKING}/5.ARG_profile" # directory of ARG profile of each sample
+DIR_ARG="${DIR_WORKING}/4.ARG_profile" # directory of ARG profile of each sample
 
 ## output directory 
 ## 結果出力するディレクトリ（絶対パスで指定。最後のスラッシュ '/' は含めない）
-DIR_16S="${DIR_WORKING}/6.16S" # 16S
+DIR_16S="${DIR_WORKING}/5.16S" # 16S
 DIR_SUM="${DIR_WORKING}/10.summary" # summary of reads
 
 ## Name of database 検索するデータベース名

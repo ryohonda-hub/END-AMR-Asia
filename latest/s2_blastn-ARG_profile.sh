@@ -1,7 +1,7 @@
 #!/bin/bash
 JOB_NAME="${SLURM_JOB_NAME}" # any job name for your reference
 #==============================================================================
-# blastn-ARG_profile, version 3.0 / created by Ryo Honda, Last updated: 2025-03-14
+# blastn-ARG_profile, version 3.0 / created by Ryo Honda, Last updated: 2025-03-15
 # The shell script for NIG supercomputer with the Singularity package of BioContainer
 #==============================================================================
 # This shell script creates ARG profile data including:
@@ -47,7 +47,7 @@ DIR_QUERY="${DIR_SEQ}/2.fasta"
 ## Output directory  (specify the absolute path. do not include the final '/') 
 ## 結果出力するディレクトリ（絶対パスで指定。最後のスラッシュ '/' は含めない）
 DIR_BLAST="${DIR_WORKING}/3.blast_CARD"
-DIR_PROF="${DIR_WORKING}/5.ARG_profile"
+DIR_PROF="${DIR_WORKING}/4.ARG_profile"
 
 ## Name of database to be specified in blast command 検索するデータベース名 (blastn で指定する値）
 ## location of the database and ARO gene catalog データベースのあるディレクトリと，遺伝子情報カタログ(aro_index)

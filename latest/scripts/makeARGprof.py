@@ -1,5 +1,5 @@
 #==============================================================================
-# make_ARG_prof.py ver.2.1 / created by Ryo Honda, Last updated: 2025-03-07
+# make_ARG_prof.py ver.2.1 / created by Ryo Honda, Last updated: 2025-03-15
 #==============================================================================
 # This python script creates ARG profile data by merging gene information from the CARD catalog with read count data using ARO as index by:
 #	$ python3 makeARGprof.py catalog_file blast_results dir_out
@@ -28,7 +28,7 @@ def main(file_cat, file_blast, dir_out):
     
     # exclude the blast results with pident or length below the cutoff thresholds
     df_blast.columns=['qseqid', 'sseqid', 'pident', 'length', 'mismatch', 'gapopen', 'qstart', 'qend', 'sstart', 'send', 'evalue', 'bitscore', 'qlen', 'slen']
-    df_blast=df_blast.query('pident >= @th_pident & length >= @th_mlen')
+    df_blast=df_blast.query('pident >= @th_pident & length >= @th_mlen').copy()
     # count blast hits
     df_blast['reads']=1
     df_blast=df_blast.reindex(columns=['sseqid','slen','reads'])

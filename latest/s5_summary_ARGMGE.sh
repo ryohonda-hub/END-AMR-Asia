@@ -1,7 +1,7 @@
 #!/bin/bash
 JOB_NAME="${SLURM_JOB_NAME}" # any job name for your reference
 #==============================================================================
-# summarize sequence reads information (ARG, MGE and 16S) / created by Ryo Honda, Last updated: 2025-03-14
+# summarize sequence reads information (ARG, MGE and 16S) / created by Ryo Honda, Last updated: 2025-03-15
 #==============================================================================
 # This shell script creates a summary table of sequence reads of each sample including:
 #  - the number of raw reads, quality reads, total 16S reads, total ARG reads, and total MGE reads
@@ -17,9 +17,9 @@ DIR_WORKING="/home/ryohonda/GlobalAMR"
 ## 配列データのあるディレクトリ（絶対パスで指定。最後のスラッシュ '/' は含めない）
 DIR_SEQ="/home/ryohonda/sequence"
 DIR_QT="${DIR_SEQ}/1.qt" # directory of trimmed sequence and fastp reports
-DIR_ARG="${DIR_WORKING}/5.ARG_profile" # directory of ARG profile of each sample
-DIR_16S="${DIR_WORKING}/6.16S" # directory of 16S taxonomy of each sample
-DIR_MGE="${DIR_WORKING}/9.MGE_profile" # directory of MGE profile of each sample
+DIR_ARG="${DIR_WORKING}/4.ARG_profile" # directory of ARG profile of each sample
+DIR_16S="${DIR_WORKING}/5.16S" # directory of 16S taxonomy of each sample
+DIR_MGE="${DIR_WORKING}/7.MGE_profile" # directory of MGE profile of each sample
 
 ## output directory 
 ## 結果出力するディレクトリ（絶対パスで指定。最後のスラッシュ '/' は含めない）
