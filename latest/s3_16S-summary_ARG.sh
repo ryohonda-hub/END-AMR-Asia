@@ -51,7 +51,7 @@ DIR_ARG="${DIR_WORKING}/4.ARG_profile" # directory of ARG profile of each sample
 
 ## output directory 
 ## 結果出力するディレクトリ（絶対パスで指定。最後のスラッシュ '/' は含めない）
-DIR_16S="${DIR_WORKING}/5.16S" # 16S
+DIR_16S="${DIR_WORKING}/5.16S_taxonomy" # 16S
 DIR_SUM="${DIR_WORKING}/10.summary" # summary of reads
 
 ## Name of database 検索するデータベース名
