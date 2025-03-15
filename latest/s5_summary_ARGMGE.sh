@@ -8,7 +8,6 @@ JOB_NAME="${SLURM_JOB_NAME}" # any job name for your reference
 # This shell script recalls and requires "summary_reads_16S_ARG_MGE.py"
 #------------------------------------------------------------------------------
 
-rlen=150 # sequence read length
 ####### Parameter setting ######################################################
 # Your working directory 自分の作業ディレクトリ
 DIR_WORKING="/home/ryohonda/GlobalAMR"

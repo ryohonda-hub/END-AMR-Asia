@@ -21,8 +21,8 @@ DIR_WORKING="/home/ryohonda/GlobalAMR"
 ## 配列ファイルリストの指定方法 (0か1を選択）
 LISTING="1" 
 #----------------------------------------
-# 0: to use all the raw files in the directory specified as DIR_RAW above.
-#	 DIR_RAWで指定したディレクトリーのすべてのファイルを使用する。
+# 0: to use all the raw files in the directory specified as DIR_QUERY below.
+#	 DIR_QUERYで指定したディレクトリーのすべてのファイルを使用する。
 #----------------------------------------
 # 1: to input the file list from a text file (1 file in 1 line).
 #    配列リストをファイルから読み込む（1行1ファイルで記述）

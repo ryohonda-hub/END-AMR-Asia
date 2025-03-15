@@ -13,7 +13,7 @@ JOB_NAME="${SLURM_JOB_NAME}" # any job name for your reference
 #------------------------------------------------------------------------------
 
 threads=24	# CPU threads / スレッド数
-rlen=150	# read length
+rlen=150	# sequence read length 
 ####### Parameter setting ######################################################
 # Your working directory 自分の作業ディレクトリ
 DIR_WORKING="/home/ryohonda/GlobalAMR"
@@ -23,8 +23,8 @@ DIR_WORKING="/home/ryohonda/GlobalAMR"
 ## 配列ファイルリストの指定方法 (0か1を選択）
 LISTING="0" 
 #----------------------------------------
-# 0: to use all the raw files in the directory specified as DIR_RAW above.
-#	 DIR_RAWで指定したディレクトリーのすべてのファイルを使用する。
+# 0: to use all the raw files in the directory specified as DIR_QT below.
+#	 DIR_QTで指定したディレクトリーのすべてのファイルを使用する。
 #----------------------------------------
 # 1: to input the file list from a text file (1 file in 1 line).
 #    配列リストをファイルから読み込む（1行1ファイルで記述）
