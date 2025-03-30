@@ -46,7 +46,7 @@ sfx_r2="_R2.qt.fq" # suffix of read 2 of the quality paired-end sequence
 ## the directory of raw sequence files (specify the absolute path. do not include the final '/')  
 ## 配列データのあるディレクトリ（絶対パスで指定。最後のスラッシュ '/' は含めない）
 DIR_SEQ="/home/ryohonda/sequence"
-DIR_QT="${DIR_SEQ}/1.qt" # directory of trimmed sequence and fastp reports
+DIR_QT="${DIR_SEQ}/1.qt" # directory of fastp reports
 DIR_ARG="${DIR_WORKING}/4.ARG_profile" # directory of ARG profile of each sample
 
 ## output directory 

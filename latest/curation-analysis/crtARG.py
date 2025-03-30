@@ -1,5 +1,5 @@
 #========================================================================
-# curate_ARG_profile.py ver.2/ created by Ryo Honda, Last updated: 2025-03-07
+# curate_ARG_profile.py ver.2 / created by Ryo Honda, Last updated: 2025-03-30
 #========================================================================
 # This python script creates a profile comparison table of multiple samples by:
 #	$ python3 crtARG.py dir_in dir_out
@@ -8,7 +8,7 @@
 #  dir_in = directory of sample data files. (all .tsv files in the directory will be merged.)
 #  dir_out = directory to output the data file
 #
-#  If the dir_in contains "_sample_names.tsv", which has sequence names in the first column and  sample names in the second column, the columns of the output table are labelled with the corresponding sample names.
+#  If the dir_in contains "_sample_names.tsv", which has sequence names in the first column and sample names in the second column, the columns of the output table are labelled with the corresponding sample names.
 #------------------------------------------------------------------------------
 import glob
 import os
@@ -50,11 +50,16 @@ def main(dir_in, dir_out):
     dic_sample=pd.DataFrame() # create an empty dataframe
     for f in file_sample_name:
         if os.path.isfile(os.path.join(dir_in,f)):
+            print(f"{f} is found. The results will be output with sample names. ")
             dic_sample=pd.read_table(os.path.join(dir_in,f), header=None, index_col=0).squeeze(axis=1)
+            # warn if any duplicated sample names
+            duplicate_names = dic_sample[dic_sample.duplicated()]
+            if not duplicate_names.empty:
+                print("Warning: There are duplicated sample names.", list(duplicate_names))
+            # covert the list to the dict type.
             dic_sample=dic_sample.to_dict()
             break
         else:
-            print("Warning: _sample_names.csv is not found.")
             dic_sample={}
 
     ####### Creat a merged ARG profiles ###################################
@@ -78,13 +83,14 @@ def main(dir_in, dir_out):
 
     # rename the columns as sample name
     if dic_sample:
-        df_joined.rename(columns=dic_sample, inplace=True)
-    
+        df_joined_out=df_joined.rename(columns=dic_sample, inplace=False)
+    else:
+        df_joined_out=df_joined
     # create the output file
     if not os.path.isdir(dir_out):
         os.makedirs(dir_out) # create the output directory if not existed.
     file_out='_merged'+suffix[0:-4]+'.'+param+suffix[-4:]
-    df_joined.to_csv(os.path.join(dir_out,file_out),sep='\t',index=False)
+    df_joined_out.to_csv(os.path.join(dir_out,file_out),sep='\t',index=False)
     print("["+args[0]+"] "+"Merged profile was created.")
     
     ######### Summation by args categories ###############################
@@ -99,8 +105,11 @@ def main(dir_in, dir_out):
             df_sum=df_sum.assign(sum=df_sum.sum(axis=1, numeric_only=True))
             df_sum.sort_values('sum',ascending=False, inplace=True)
             df_sum=df_sum.drop('sum', axis=1)
-        df_sum=df_sum.T
-    
+        # rename the columns as sample name
+        if dic_sample:
+            df_sum.rename(columns=dic_sample, inplace=True)
+        # arrange the table for output
+        df_sum=df_sum.sort_index(axis=1,ascending=False).T
         # output the summary file.
         file_out="ARG."+cat.replace(' ','_')+"."+param+".csv"
         df_sum.to_csv(os.path.join(dir_out,file_out))
@@ -110,5 +119,4 @@ def main(dir_in, dir_out):
 if __name__=="__main__":
     args=sys.argv
     main(args[1],args[2])
-
 

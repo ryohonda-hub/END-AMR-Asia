@@ -1,5 +1,5 @@
 #========================================================================
-# curate_16S_taxon.py ver.2 / created by Ryo Honda, Last updated: 2025-03-11
+# curate_16S_taxon.py ver.2 / created by Ryo Honda, Last updated: 2025-03-30
 #========================================================================
 # This python script creates a profile comparison table of multiple samples from mpa-style taxonomy read-count data by:
 #	$ python3 crt16S.py dir_in dir_out
@@ -8,7 +8,7 @@
 #  dir_in = directory of sample data files. (all .tsv files in the directory will be merged.)
 #  dir_out = directory to output the data file
 #
-#  If the dir_in contains "_sample_names.tsv", which has sequence names in the first column and  sample names in the second column, the columns of the output table are labelled with the corresponding sample names.
+#  If the dir_in contains "_sample_names.tsv", which has sequence names in the first column and sample names in the second column, the columns of the output table are labelled with the corresponding sample names.
 #------------------------------------------------------------------------------
 import glob
 import re
@@ -41,11 +41,16 @@ def main(dir_in, dir_out):
     dic_sample=pd.DataFrame() # create an empty dataframe
     for f in file_sample_name:
         if os.path.isfile(os.path.join(dir_in,f)):
+            print(f"{f} is found. The results will be output with sample names. ")
             dic_sample=pd.read_table(os.path.join(dir_in,f), header=None, index_col=0).squeeze(axis=1)
+            # warn if any duplicated sample names
+            duplicate_names = dic_sample[dic_sample.duplicated()]
+            if not duplicate_names.empty:
+                print("Warning: There are duplicated sample names.", list(duplicate_names))
+            # covert the list to the dict type.
             dic_sample=dic_sample.to_dict()
             break
         else:
-            print("Warning: _sample_names.csv is not found.")
             dic_sample={}
     
     ####### Creat a merged ARG profiles ###################################
@@ -119,7 +124,9 @@ def main(dir_in, dir_out):
         # sort the row indices by sum of each row
         df_pca=df_pca.assign(sum=df_pca.sum(axis=1, numeric_only=True))
         df_pca.sort_values('sum',ascending=False, inplace=True)
-        df_pca=df_pca.drop('sum', axis=1).T
+        df_pca=df_pca.drop('sum', axis=1)
+        df_pca=df_pca.sort_index(axis=1,ascending=False).T
+
         # output the summary table
         file_out='16S.'+param+'.'+str(i+1)+'_'+tx+'.csv'
         df_pca.to_csv(os.path.join(dir_out,file_out),index=True)
