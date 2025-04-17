@@ -1,6 +1,7 @@
 #!/bin/bash
 #SBATCH --output=/home/your_username/log/%x_%j.out
 #SBATCH --error=/home/your_username/log/%x_%j.err
+#SBATCH -p short
 
 ./s5_summary_ARGMGE.sh
 
