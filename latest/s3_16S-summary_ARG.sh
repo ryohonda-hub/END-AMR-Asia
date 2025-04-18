@@ -23,7 +23,7 @@ DIR_WORKING="/home/ryohonda/GlobalAMR"
 ## 配列ファイルリストの指定方法 (0か1を選択）
 LISTING="0" 
 #----------------------------------------
-# 0: to use all the raw files in the directory specified as DIR_QT below.
+# 0: to use all the sequence files in the directory specified as DIR_QT below.
 #	 DIR_QTで指定したディレクトリーのすべてのファイルを使用する。
 #----------------------------------------
 # 1: to input the file list from a text file (1 file in 1 line).
@@ -43,8 +43,8 @@ IFS=$'\n' # '\n' for Mac/Unix, '\r\n' for Windows.
 sfx_r1="_R1.qt.fq" # suffix of read 1 of the quality paired-end sequence
 sfx_r2="_R2.qt.fq" # suffix of read 2 of the quality paired-end sequence
 
-## the directory of raw sequence files (specify the absolute path. do not include the final '/')  
-## 配列データのあるディレクトリ（絶対パスで指定。最後のスラッシュ '/' は含めない）
+## the directory of quality-trimmed fastq files (specify the absolute path. do not include the final '/')  
+## トリミング後のFastq配列データのあるディレクトリ（絶対パスで指定。最後のスラッシュ '/' は含めない）
 DIR_SEQ="/home/ryohonda/sequence"
 DIR_QT="${DIR_SEQ}/1.qt" # directory of fastp reports
 DIR_ARG="${DIR_WORKING}/4.ARG_profile" # directory of ARG profile of each sample
