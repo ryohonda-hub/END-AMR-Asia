@@ -16,8 +16,8 @@ DIR_WORKING="/home/ryohonda/GlobalAMR"
 
 # Directories and files
 ## Suffix of raw sequence files / Raw配列ファイルの語尾
-sfx_r1="_1.fq" # suffix of read 1 of the paired-end sequence
-sfx_r2="_2.fq" # suffix of read 2 of the paired-end sequence
+sfx_r1="_Read1.fq.gz" # suffix of read 1 of the paired-end sequence
+sfx_r2="_Reas2.fq.gz" # suffix of read 2 of the paired-end sequence
 
 ## The directory of raw sequence files (specify the absolute path. do not include the final '/') 
 ## 配列生データのあるディレクトリ（絶対パスで指定。最後にスラッシュ '/' は含めない）

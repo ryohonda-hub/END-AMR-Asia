@@ -12,7 +12,7 @@ JOB_NAME="${SLURM_JOB_NAME}" # any job name for your reference
 # 2. summary_reads_16S_ARG.py [to creates a summary table of sequence reads]
 #------------------------------------------------------------------------------
 
-threads=24	# CPU threads / スレッド数
+threads=8	# CPU threads / スレッド数
 rlen=150	# sequence read length 
 ####### Parameter setting ######################################################
 # Your working directory 自分の作業ディレクトリ
@@ -39,7 +39,7 @@ IFS=$'\n' # '\n' for Mac/Unix, '\r\n' for Windows.
 #----------------------------------------
 
 # Directories and files
-## Suffix of raw sequence files / Raw配列ファイルの語尾
+## Suffix of the quality-trimmed sequence files / トリミング済配列ファイルの語尾
 sfx_r1="_R1.qt.fq" # suffix of read 1 of the quality paired-end sequence
 sfx_r2="_R2.qt.fq" # suffix of read 2 of the quality paired-end sequence
 

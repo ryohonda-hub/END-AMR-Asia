@@ -38,7 +38,7 @@ IFS=$'\n' # '\n' for Mac/Unix, '\r\n' for Windows.
 
 # Directories and files
 ## Your working directory and the directory of query sequence files  (specify the absolute path. do not include the final '/')  
-## Suffix of query sequence files / Raw配列ファイルの語尾
+## Suffix of query sequence files / QueryとなるFasta配列ファイルの語尾
 sfx_fa="_R12.fa" # suffix of query fasta files
 
 ## 配列データのあるディレクトリ（絶対パスで指定。最後のスラッシュ '/' は含めない）
