@@ -1,4 +1,4 @@
-# How to Write and Run a Job Submission Script  
+# How to Prepare and Run a Job Submission Script  
 for Slurm on NIG Supercomputer, Last updated: 2025-04-19
 
 ## Preparing the Log Directory  
