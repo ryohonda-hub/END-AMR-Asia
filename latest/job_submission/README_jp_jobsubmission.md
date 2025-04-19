@@ -1,4 +1,4 @@
-# ジョブ投入スクリプトの記述＆実行方法 
+# ジョブ投入スクリプトの作成＆実行方法 
 for Slurm on NIG Supercomputer, Last updated: 2025-04-19
 
 ## ログ保存場所の準備
