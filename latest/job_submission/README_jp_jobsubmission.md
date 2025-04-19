@@ -8,7 +8,7 @@ $ mkdir ~/log/
 ```
 
 ## ジョブ投入スクリプトの作成方法
-### スクリプト例（`test.sh`を投入するためのスクリプト）
+### スクリプト例（ジョブ実行スクリプト`test.sh`を投入）
 ```bash
 #!/bin/bash
 #SBATCH --output=/home/your_username/log/%x_%j.out
