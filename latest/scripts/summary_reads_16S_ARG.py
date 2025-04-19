@@ -1,5 +1,5 @@
 #========================================================================
-# summary_reads_16S_ARG.py ver.2/ created by Ryo Honda, Last updated: 2025-03-07
+# summary_reads_16S_ARG.py ver.2/ created by Ryo Honda, Last updated: 2025-04-20
 #========================================================================
 # This python script creates a summary table of sequence reads by:
 #	$ python3 summary_reads_16S_ARG.py dir_qt dir_16s dir_arg dir_out
@@ -64,7 +64,7 @@ def main(dir_qt, dir_16s, dir_arg, dir_out):
             else:
                 abundance_arg=None
         else:
-            reads_arg=None; reads_arg=None; abundance_arg=None
+            reads_arg=None; rpk_arg=None; abundance_arg=None
         # add in the output dataframe
         df_out.loc[name]=[reads_before_qt, reads_after_qt,reads_16s,reads_arg,rpk_16s,rpk_arg,abundance_arg]
         i+=1
