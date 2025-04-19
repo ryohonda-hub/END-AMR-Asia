@@ -9,6 +9,7 @@ $ mkdir ~/log/
 ---
 
 ## Preparing a Job Submission Script  
+You can create and edit a script using a source-code editor on your local PC. (You can also use `emacs` on the supercomputer.)
 ### Example Script (to submit `test.sh`)  
 ```bash
 #!/bin/bash
