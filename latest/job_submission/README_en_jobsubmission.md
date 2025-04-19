@@ -83,7 +83,7 @@ Afterward, confirm that both the submission and execution scripts have execute p
 ---
 
 ## Submitting the Job  
-*\*Submit jobs from the interactive node of the supercomputer (login by `$ ssh a001`).*
+*\*Submit jobs from the interactive node of the supercomputer* (login by `$ ssh a001` from the gateway node).
 
 Submit your job script using the `sbatch` command:
 ```bash
