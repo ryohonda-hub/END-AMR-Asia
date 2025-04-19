@@ -32,7 +32,7 @@ You can omit options you don't need. Request appropriate resources depending on 
 
 ##### Common Options  
 - `-p` *compute node* (e.g., `epyc`, `short`, `rome`, `medium`)  
-- `-t` *max runtime* (`d-hh:mm:ss`). If omitted, the default `TIMELIMIT` for the node applies (e.g., 1 hour for the `short` node).  
+- `-t` *max runtime* (`d-hh:mm:ss`). If omitted, the default `TIMELIMIT` for the node applies (e.g., 1 hour for the *short* node).  
 - `-N` *min-max number of nodes* Specify only for a parallel job (when you request multiple CPU threads). typically `-N 1-1`.  
 - `-n` *number of CPU threads* (must specify `-N` as well when you request multiple threads)  
 - `--mem=` *total memory for the job* (e.g., `--mem=32G`)  
@@ -69,7 +69,7 @@ $ ls -l
 If the fourth character is `x` (e.g., `-rwxr--r--`), the file is executable.
 
 ### Add Execute Permission  
-Before running, add execute permission for the script owner (user `u`):
+Before running, add execute permission for the script owner (`u`):
 You need to do this for **both the job submission script and the job execution script**.
 ```bash
 $ chmod u+x script_name
@@ -83,7 +83,8 @@ Afterward, confirm that both the submission and execution scripts have execute p
 ---
 
 ## Submitting the Job  
-*** Submit jobs from the interactive node of the supercomputer (e.g., connect with `$ ssh a001`).***
+* *Submit jobs from the interactive node of the supercomputer (e.g., connect with `$ ssh a001`).*
+
 Submit your job script using the `sbatch` command:
 ```bash
 # Submitting job script js_test.sh
@@ -111,7 +112,7 @@ Check the log files for errors.
 - **TO** — *TIMEOUT* (ran over the time limit)
 
 ### Canceling a Job  
-You can cancel a running or pending job with this command (check job ID via `squeue`):
+You can cancel a running or pending job with this command (check job ID via `squeue` as above):
 ```bash
 $ scancel job_id
 ```
