@@ -2,7 +2,7 @@
 for Slurm on NIG Supercomputer, Last updated: 2025-04-19
 
 ## Preparing the Log Directory  
-Create a directory `~/log/` to save job output logs. This only needs to be done once.
+Create a directory `~/log/` to save job output logs in your home directory on the supercomputer. This only needs to be done once.
 ```bash
 $ mkdir ~/log/
 ```
