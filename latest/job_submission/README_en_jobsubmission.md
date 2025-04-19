@@ -74,6 +74,7 @@ Navigate to the directory with your script and run:
 $ ls -l
 ```
 If the fourth character is `x` (e.g., `-rwxr--r--`), the file is executable.
+By default, regular files have the permission `-rw-r--r--`, which does not include execute permission (`x`). Follow the steps below to change the permission of the script you created.
 
 ### Add Execute Permission  
 Before running, add execute permission for the script owner (`u`):
