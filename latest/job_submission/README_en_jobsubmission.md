@@ -28,11 +28,11 @@ Update lines 2–3 with your own log directory path under your home directory (e
 
 #### 2. Specify job execution options (resource requirements)  
 From line 4 onward, request the necessary supercomputer resources using `#SBATCH` options.  
-You can omit options you don't need.
+You can omit options you don't need. Request appropriate resources depending on the job you will execute.
 
 ##### Common Options  
 - `-p` compute node (e.g., `epyc`, `short`, `rome`, `medium`)  
-- `-t` max runtime (`d-hh:mm:ss`). If omitted, the default `TIMELIMIT` for the node applies (e.g., 1 hour for `short`).  
+- `-t` max runtime (`d-hh:mm:ss`). If omitted, the default `TIMELIMIT` for the node applies (e.g., 1 hour for the `short` node).  
 - `-N` min-max number of nodes (typically `1-1`)  
 - `-n` number of CPU threads (must specify `-N` as well)  
 - `--mem=` total memory for the job (e.g., `--mem=32G`)  
@@ -54,9 +54,9 @@ You can execute multiple scripts sequentially as follows:
 ```
 
 ### Saving and Transferring the Submission Script  
-Make sure to save the script with **LF (Line Feed)** line endings.  
-(Windows uses `CRLF`, which can cause errors—**be sure to convert it**!)  
 Use `.sh` as the file extension.
+Make sure to save the script with **LF (Line Feed)** line endings.  
+(Windows uses "CRLF", which can cause errors—**be sure to convert it**!)  
 
 ---
 
@@ -83,7 +83,7 @@ Afterward, confirm that both the submission and execution scripts have execute p
 ---
 
 ## Submitting the Job  
-*Submit jobs from the interactive node of the supercomputer (e.g., connect with `$ ssh a001`).*  
+*** Submit jobs from the interactive node of the supercomputer (e.g., connect with `$ ssh a001`).***
 Submit your job script using the `sbatch` command:
 ```bash
 # Submitting job script js_test.sh
