@@ -31,11 +31,11 @@ From line 4 onward, request the necessary supercomputer resources using `#SBATCH
 You can omit options you don't need. Request appropriate resources depending on the job you will execute.
 
 ##### Common Options  
-- `-p` *compute node* (e.g., `epyc`, `short`, `rome`, `medium`)  
-- `-t` *max runtime* (`d-hh:mm:ss`). If omitted, the default `TIMELIMIT` for the node applies (e.g., 1 hour for the *short* node).  
-- `-N` *min-max number of nodes* Specify only for a parallel job (when you request multiple CPU threads). typically `-N 1-1`.  
-- `-n` *number of CPU threads* (must specify `-N` as well when you request multiple threads)  
-- `--mem=` *total memory for the job* (e.g., `--mem=32G`)  
+- `-p` *compute node*  — e.g., `epyc`, `short`, `rome`, `medium`  
+- `-t` *max runtime* (`d-hh:mm:ss`). — If omitted, the default `TIMELIMIT` for the node applies (e.g., 1 hour for the *short* node).  
+- `-N` *min-max number of nodes* — Specify only for a parallel job (when you request multiple CPU threads). typically `-N 1-1`.  
+- `-n` *number of CPU threads*  — must specify `-N` as well when you request multiple threads.  
+- `--mem=` *total memory for the job*  — e.g., `--mem=32G`  
 - `-J` *job name (optional)*
 
 ### Write the Script(s) to Be Executed  
