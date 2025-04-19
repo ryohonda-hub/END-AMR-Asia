@@ -11,7 +11,7 @@ $ mkdir ~/log/
 ## ジョブ投入スクリプトの作成方法
 スクリプトは自分のローカルPC上でコードエディタを用いて作成するとよい。（スパコン上で編集したい場合はemacsが使える。）
 ### スクリプト例
-ジョブ実行スクリプト`test.sh`を投入するためのスクリプト`js_test.sh`:
+ジョブ実行スクリプト`test.sh`を投入するためのスクリプトの例:
 ```bash
 #!/bin/bash
 #SBATCH --output=/home/your_username/log/%x_%j.out
@@ -84,7 +84,7 @@ $ chmod u+x *.sh
 
 シェルから`sbatch`コマンドで，ジョブ投入スクリプトをジョブスケジューラ(Slurm)に送る。
 
-例：ジョブ投入スクリプトjs_test.shの投入
+例：ジョブ投入スクリプト`js_test.sh`の投入
 ```bash
 $ sbatch js_test.sh
 ```

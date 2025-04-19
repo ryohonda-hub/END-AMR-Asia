@@ -11,7 +11,7 @@ $ mkdir ~/log/
 ## Preparing a Job Submission Script  
 You can create and edit a script using a source-code editor on your local PC. (You can also use `emacs` on the supercomputer.)
 ### Example Script 
-The script `js_test.sh` to submit the job on the execution script`test.sh`:
+An example script to submit the job on the execution script`test.sh`:
 ```bash
 #!/bin/bash
 #SBATCH --output=/home/your_username/log/%x_%j.out
@@ -91,7 +91,7 @@ Afterward, confirm that both the submission and execution scripts have execute p
 *\*Submit jobs from the interactive node of the supercomputer* (login by `$ ssh a001` from the gateway node).
 
 Submit your job submission script using the `sbatch` command.
-Example - Submitting the job script js_test.sh:
+Example - Submitting the job submission script `js_test.sh`:
 ```bash
 $ sbatch js_test.sh
 ```
