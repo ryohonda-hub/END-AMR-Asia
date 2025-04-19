@@ -11,7 +11,7 @@ $ mkdir ~/log/
 ## Preparing a Job Submission Script  
 You can create and edit a script using a source-code editor on your local PC. (You can also use `emacs` on the supercomputer.)
 ### Example Script 
-The script `js_test.sh` to submit the job on `test.sh`:
+The script `js_test.sh` to submit the job on the execution script`test.sh`:
 ```bash
 #!/bin/bash
 #SBATCH --output=/home/your_username/log/%x_%j.out
