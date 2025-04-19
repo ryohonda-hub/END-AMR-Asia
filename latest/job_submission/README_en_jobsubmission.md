@@ -6,8 +6,8 @@ Create a directory `~/log/` to save job output logs. This only needs to be done 
 ```bash
 $ mkdir ~/log/
 ```
-
-## How to Create a Job Submission Script  
+---
+## Preparing a Job Submission Script  
 ### Example Script (to submit `test.sh`)  
 ```bash
 #!/bin/bash
@@ -22,7 +22,7 @@ $ mkdir ~/log/
 ./test.sh
 ```
 
-### Explanation of Header Lines (lines starting with `#`)  
+### Editing Header Lines (lines starting with `#`)  
 #### 1. Change the log output directory  
 Update lines 2–3 with your own log directory path under your home directory (e.g., `/home/ryohonda/log/%x_%j.out`).
 
@@ -38,9 +38,9 @@ You can omit options you don't need. Request appropriate resources depending on 
 - `--mem=` *total memory for the job* (e.g., `--mem=32G`)
 - `-J` *job name (optional)*
 
-### Write the Script(s) to Be Executed  
-After the header lines, add the commands or scripts you want to run.  
-If the script is in the same directory as the submission script, use `./` (meaning "current directory").
+### Specify the Job Execution Script(s) to Be Run  
+After the header lines, add the commands or job execution scripts you want to run.  
+If the execution script is in the same directory as the submission script, use `./` (meaning "current directory").
 
 You can execute multiple scripts sequentially as follows:
 ```bash
@@ -54,10 +54,11 @@ You can execute multiple scripts sequentially as follows:
 ```
 
 ### Saving and Transferring the Submission Script  
-Use `.sh` as the file extension.
+Save the script with `.sh` as the file extension.
 Make sure to save the script with **LF (Line Feed)** line endings.  
 (Windows uses "CRLF", which can cause errors—**be sure to convert it**!)  
 
+After saving it on your local PC, upload it to the supercomputer via FTP. From then on, all work will be done on the supercomputer.
 ---
 
 ## Permission Settings  
@@ -72,7 +73,7 @@ If the fourth character is `x` (e.g., `-rwxr--r--`), the file is executable.
 Before running, add execute permission for the script owner (`u`):
 You need to do this for **both the job submission script and the job execution script**.
 ```bash
-$ chmod u+x script_name
+$ chmod u+x script_name.sh
 ```
 To change permissions for all `.sh` files at once:
 ```bash
@@ -80,12 +81,10 @@ $ chmod u+x *.sh
 ```
 Afterward, confirm that both the submission and execution scripts have execute permission (`x`) using `ls -l`.
 
----
-
 ## Submitting the Job  
 *\*Submit jobs from the interactive node of the supercomputer* (login by `$ ssh a001` from the gateway node).
 
-Submit your job script using the `sbatch` command:
+Submit your job submission script using the `sbatch` command:
 ```bash
 # Submitting job script js_test.sh
 $ sbatch js_test.sh
@@ -116,8 +115,6 @@ You can cancel a running or pending job with this command (check job ID via `squ
 ```bash
 $ scancel job_id
 ```
-
----
 
 ## Checking Output and Errors  
 Standard output and errors are saved in the `~/log/` directory.  
