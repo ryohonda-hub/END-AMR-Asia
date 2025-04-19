@@ -59,7 +59,9 @@ Save the script with `.sh` as the file extension.
 Make sure to save the script with **LF (Line Feed)** line endings.  
 (Windows uses "CRLF", which can cause errors—**be sure to convert it**!)  
 
-After saving it on your local PC, upload it to the supercomputer via FTP. From then on, all work will be done on the supercomputer.
+After saving it on your local PC, upload it to the supercomputer via FTP. 
+
+From then on, all work will be done on the supercomputer.
 
 ---
 
