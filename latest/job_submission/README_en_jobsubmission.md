@@ -7,6 +7,7 @@ Create a directory `~/log/` to save job output logs. This only needs to be done 
 $ mkdir ~/log/
 ```
 ---
+
 ## Preparing a Job Submission Script  
 ### Example Script (to submit `test.sh`)  
 ```bash
@@ -59,6 +60,7 @@ Make sure to save the script with **LF (Line Feed)** line endings.
 (Windows uses "CRLF", which can cause errors—**be sure to convert it**!)  
 
 After saving it on your local PC, upload it to the supercomputer via FTP. From then on, all work will be done on the supercomputer.
+
 ---
 
 ## Permission Settings  
