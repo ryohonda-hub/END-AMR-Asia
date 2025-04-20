@@ -34,7 +34,8 @@ def main(dir_in, dir_out):
     #======================================================
     # specify data type of the dataframe
     dtype_dict = {'taxonomy': 'category', param: 'float32'}
-
+    
+    n_warn=0 # count warning
     # get the list of the profile files in the input directory
     files_in=sorted(glob.glob(os.path.join(dir_in,"*"+suffix)))
     # create the dictionary of sample names corresponding to sequence names
@@ -48,7 +49,8 @@ def main(dir_in, dir_out):
             if not duplicate_names.empty:
                 print("Warning: There are duplicated sample names. Check the list in 'duplicated_sample_names.csv'")
                 duplicate_names.sort_values().to_csv(os.path.join(dir_out,'duplicated_sample_names.csv'), header=False)
-            # covert the list to the dict type.
+                n_warn+=1
+            # convert the list to the dict type.
             dic_sample=dic_sample.to_dict()
             break
         else:
@@ -132,7 +134,7 @@ def main(dir_in, dir_out):
         file_out='16S.'+param+'.'+str(i+1)+'_'+tx+'.csv'
         df_pca.to_csv(os.path.join(dir_out,file_out),index=True)
         print("["+args[0]+"] "+file_out+" was created.")
-    print(args[0]+" completed.")
+    print(f"{args[0]} completed. There are {n_warn} warnings.")
     
 if __name__=="__main__":
     args=sys.argv

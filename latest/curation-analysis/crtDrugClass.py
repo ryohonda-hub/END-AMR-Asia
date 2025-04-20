@@ -26,8 +26,8 @@ def main(file_reads, dir_in, dir_out):
     # name of the file containing list of sample names corresponding to sequence names
     # (list of allowable file names for compatibility)
     file_sample_name=['_sample_names.tsv','sample_names.tsv','_sample_name.tsv','sample_name.tsv']
-    
     ####### Main ###################################    
+    n_warn=0 # count warning
     # get the list of the profile files in the input directory
     files_in=sorted(glob.glob(os.path.join(dir_in,"*"+suffix)))
     n=len(files_in)
@@ -48,7 +48,8 @@ def main(file_reads, dir_in, dir_out):
             if not duplicate_names.empty:
                 print("Warning: There are duplicated sample names. Check the list in 'duplicated_sample_names.csv'")
                 duplicate_names.sort_values().to_csv(os.path.join(dir_out,'duplicated_sample_names.csv'), header=False)
-            # covert the list to the dict type.
+                n_warn+=1
+            # convert the list to the dict type.
             dic_sample=dic_sample.to_dict()
             break
         else:
@@ -146,6 +147,7 @@ def main(file_reads, dir_in, dir_out):
         file_out=os.path.join(dir_out, 'ARG.drug_class.efflux.per_16S.csv')
         df_sum_efflux.to_csv(file_out)
         print("["+args[0]+"] "+file_out+" was created.")
+    print(f"{args[0]} completed. There are {n_warn} warnings.")
 
 if __name__=="__main__":
     args=sys.argv
