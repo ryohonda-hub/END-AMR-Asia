@@ -47,24 +47,20 @@ def main(dir_qt, dir_16s, dir_arg, dir_out):
         reads_after_qt=js_qt['summary']['after_filtering']['total_reads']
         # get total 16S reads and RPK
         f_16s=os.path.join(dir_16s,name+sfx_16s)
+        reads_16s=None; rpk_16s=None
         if os.path.isfile(f_16s):
             df_16s=pd.read_table(f_16s, header=0,index_col=0)
             reads_16s=df_16s.loc['Bacteria','new_est_reads']
             rpk_16s=reads_16s / slen_16s * 1000
-        else:
-            reads_16s=None; rpk_16s=None
         # get total ARG reads and RPK
         f_arg=os.path.join(dir_arg,name+sfx_arg)
+        reads_arg=None; rpk_arg=None; abundance_arg=None
         if os.path.isfile(f_arg):
             df_arg=pd.read_table(f_arg, header=0)
             reads_arg=df_arg['reads'].sum()
             rpk_arg=df_arg['RPK'].sum()
             if rpk_16s is not None and rpk_16s != 0:
                 abundance_arg=rpk_arg / rpk_16s
-            else:
-                abundance_arg=None
-        else:
-            reads_arg=None; rpk_arg=None; abundance_arg=None
         # add in the output dataframe
         df_out.loc[name]=[reads_before_qt, reads_after_qt,reads_16s,reads_arg,rpk_16s,rpk_arg,abundance_arg]
         i+=1
