@@ -1,6 +1,7 @@
 #!/bin/bash
 #SBATCH --output=/home/your_username/log/%x_%j.out.log
 #SBATCH --error=/home/your_username/log/%x_%j.err.log
+#SBATCH -p short
 
 ./ss4.1_MGEprof.sh
 
