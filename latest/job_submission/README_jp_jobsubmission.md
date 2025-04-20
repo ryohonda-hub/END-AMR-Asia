@@ -14,8 +14,8 @@ $ mkdir ~/log/
 ジョブ実行スクリプト`test.sh`を投入するためのスクリプトの例:
 ```bash
 #!/bin/bash
-#SBATCH --output=/home/your_username/log/%x_%j.out
-#SBATCH --error=/home/your_username/log/%x_%j.err
+#SBATCH --output=/home/your_username/log/%x_%j.out.log
+#SBATCH --error=/home/your_username/log/%x_%j.err.log
 #SBATCH -p epyc
 #SBATCH -t 3-23:59:59
 #SBATCH -N 1-1 
@@ -27,7 +27,7 @@ $ mkdir ~/log/
 
 ### ヘッダ行（`#`で始まる行）の記述
 #### 1. ログ保存フォルダの変更
-スクリプトの2~3行目を自分のホームディレクトリ内のログ保存場所のパスに変更（例：`/home/ryohonda/log/%x_%j.out`）
+スクリプトの2~3行目を自分のホームディレクトリ内のログ保存場所のパスに変更（例：`/home/ryohonda/log/%x_%j.out.log`）
 #### 2. 実行オプション（リソース要求）を確認・変更
 4行目以降で，投入するジョブに必要なスパコン上のリソースを `#SBATCH`オプションで指定して要求できる。実行内容に合わせて要求すること。必要がない場合は指定しなくてもOK。
 ##### 主なオプション
@@ -44,8 +44,8 @@ $ mkdir ~/log/
 次の例のように，複数のスクリプトを記述して順番に実行することも可能。
 ```bash
 #!/bin/bash
-#SBATCH --output=/home/your_username/log/%x_%j.out
-#SBATCH --error=/home/your_username/log/%x_%j.err
+#SBATCH --output=/home/your_username/log/%x_%j.out.log
+#SBATCH --error=/home/your_username/log/%x_%j.err.log
 
 ./test1.sh
 ./test2.sh
@@ -121,8 +121,8 @@ $ ls -lt
 ```
 #### ログファイルの確認方法
 ログファイルは２種類生成される。ログファイルはテキストファイル形式。
-- `.out` — （出力ログ）スクリプトおよびプログラムによる標準出力（実行状況など）
-- `.err` — （エラーログ）スパコンやプログラムによるエラーや警告
+- `.out.log` — （出力ログ）スクリプトおよびプログラムによる標準出力（実行状況など）
+- `.err.log` — （エラーログ）スパコンやプログラムによるエラーや警告
 
 `ls -lt`の一覧で日付の前の数字がファイルサイズを表す。0以外の場合はなにかしらのログが記録されている。0の場合は空っぽ。
 例えば，エラーログのサイズが0の場合，エラーがないことを（ファイルを開かなくても）確認できる。

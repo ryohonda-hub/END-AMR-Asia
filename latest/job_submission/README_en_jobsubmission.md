@@ -14,8 +14,8 @@ You can create and edit a script using a source-code editor on your local PC. (Y
 An example script to submit the job on the execution script`test.sh`:
 ```bash
 #!/bin/bash
-#SBATCH --output=/home/your_username/log/%x_%j.out
-#SBATCH --error=/home/your_username/log/%x_%j.err
+#SBATCH --output=/home/your_username/log/%x_%j.out.log
+#SBATCH --error=/home/your_username/log/%x_%j.err.log
 #SBATCH -p epyc
 #SBATCH -t 3-23:59:59
 #SBATCH -N 1-1 
@@ -27,7 +27,7 @@ An example script to submit the job on the execution script`test.sh`:
 
 ### Editing Header Lines (lines starting with `#`)  
 #### 1. Change the log output directory  
-Update lines 2–3 with your own log directory path under your home directory (e.g., `/home/ryohonda/log/%x_%j.out`).
+Update lines 2–3 with your own log directory path under your home directory (e.g., `/home/ryohonda/log/%x_%j.out.log`).
 
 #### 2. Specify job execution options (resource requirements)  
 From line 4 onward, request the necessary supercomputer resources using `#SBATCH` options.  
@@ -48,8 +48,8 @@ If the execution script is in the same directory as the submission script, use `
 You can execute multiple scripts sequentially as follows:
 ```bash
 #!/bin/bash
-#SBATCH --output=/home/your_username/log/%x_%j.out
-#SBATCH --error=/home/your_username/log/%x_%j.err
+#SBATCH --output=/home/your_username/log/%x_%j.out.log
+#SBATCH --error=/home/your_username/log/%x_%j.err.log
 
 ./test1.sh
 ./test2.sh
@@ -137,11 +137,11 @@ $ ls -lt
 
 ### Types of Log Files  
 Two types of log files are generated (in plain text):
-- `.out` — standard output from scripts and programs (e.g., job progress)  
-- `.err` — errors or warnings from the system or programs
+- `.out.log` — standard output from scripts and programs (e.g., job progress)  
+- `.err.log` — errors or warnings from the system or programs
 
 In the `ls -lt` output, the number before the date shows the file size.  
-If the `.err` log is 0 bytes, no errors occurred (you can tell without opening it).
+If the `.err.log` log is 0 bytes, no errors occurred (you can tell without opening it).
 
 ### Viewing Log Files with `more`  
 Use the `more` command to view log content without downloading it:

@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --output=/home/your_username/log/%x_%j.out
-#SBATCH --error=/home/your_username/log/%x_%j.err
+#SBATCH --output=/home/your_username/log/%x_%j.out.log
+#SBATCH --error=/home/your_username/log/%x_%j.err.log
 
 ./ss1.1_fq2fa.sh
 
