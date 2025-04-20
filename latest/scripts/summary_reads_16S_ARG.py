@@ -39,7 +39,7 @@ def main(dir_qt, dir_16s, dir_arg, dir_out):
     ## Summarize reads data
     for f in files_qt: 
         # get sequence name
-        name=os.path.basename(f).rstrip(sfx_qt) 
+        name=os.path.basename(f).removesuffix(sfx_qt) 
         # get total reads before and after quality trimming
         with open(f, 'r') as data:
             js_qt=json.load(data)

@@ -1,5 +1,5 @@
 #==============================================================================
-# make_MGE_prof.py ver.2.1 / created by Ryo Honda, Last updated: 2025-03-15
+# make_MGE_prof.py ver.2.1 / created by Ryo Honda, Last updated: 2025-04-20
 #==============================================================================
 # This python script creates ARG profile data by merging gene information from the CARD catalog with read count data using ARO as index by:
 #	$ python3 makeMGEprof.py catalog_file blast_results dir_out
@@ -18,9 +18,12 @@ import sys
 import pandas as pd
 
 def main(file_cat, file_blast, dir_out):
-    # cutoff conditions of the blast result
+    #=== cutoff thresholds of the blast result ===
     th_mlen=100     # (bp) hits with matched length below this value are excluded.
     th_pident=90    # (%) hits with pident below this value are excluded.
+    #=============================================
+    print(f"makeMGEprof.py - threshold: length>{th_mlen} bp, pident>{th_pident}%")
+    
     # import the database catalog and blast results
     df_catalog=pd.read_table(file_cat,header=0)
     df_blast=pd.read_table(file_blast,header=0)
@@ -59,7 +62,7 @@ def main(file_cat, file_blast, dir_out):
     # create the output file
     if not os.path.exists(dir_out):
         os.makedirs(dir_out)
-    file_out_base=os.path.splitext(os.path.basename(file_blast))[0].rstrip('.blast')
+    file_out_base=os.path.splitext(os.path.basename(file_blast))[0].removesuffix('.blast')
     
     df_out=df_prof_raw.reindex(columns=['sseqid','MGEDB ID', 'gene symbol','Function', 'gene name','slen','reads','RPK','prop_RPK'])
     file_out=os.path.join(dir_out,file_out_base+".MGE_profile.tsv")

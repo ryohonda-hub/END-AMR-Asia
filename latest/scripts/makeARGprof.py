@@ -1,5 +1,5 @@
 #==============================================================================
-# make_ARG_prof.py ver.2.1 / created by Ryo Honda, Last updated: 2025-03-15
+# make_ARG_prof.py ver.2.1 / created by Ryo Honda, Last updated: 2025-04-20
 #==============================================================================
 # This python script creates ARG profile data by merging gene information from the CARD catalog with read count data using ARO as index by:
 #	$ python3 makeARGprof.py catalog_file blast_results dir_out
@@ -18,10 +18,12 @@ import sys
 import pandas as pd
 
 def main(file_cat, file_blast, dir_out):
-    # cutoff thresholds of the blast result
+    #=== cutoff thresholds of the blast result ===
     th_mlen=100     # (bp) hits with matched length below this value are excluded.
     th_pident=90    # (%) hits with pident below this value are excluded.
-
+    #=============================================
+    print(f"makeARGprof.py - threshold: length>{th_mlen} bp, pident>{th_pident}%")
+    
     # import arg catalog and blast results
     df_catalog=pd.read_table(file_cat,header=0)
     df_blast=pd.read_table(file_blast,header=0)
@@ -61,7 +63,7 @@ def main(file_cat, file_blast, dir_out):
         os.makedirs(dir_out)
     df_out=df_prof.reindex(columns=['sseqid','ARO Accession', 'gene symbol','CARD Short Name', 'AMR Gene Family','Drug Class','MAR','Resistance Mechanism','slen','reads','RPK','prop_RPK'])
     file_out=os.path.splitext(os.path.basename(file_blast))[0]
-    file_out=os.path.join(dir_out,file_out.rstrip('.blast')+".ARG_profile.tsv")
+    file_out=os.path.join(dir_out,file_out.removesuffix('.blast')+".ARG_profile.tsv")
     df_out.to_csv(file_out,sep='\t',index=False)
 
 if __name__=="__main__":
