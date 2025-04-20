@@ -1,5 +1,5 @@
 #========================================================================
-# curate_drug_class.py / created by Ryo Honda, Last updated: 2025-03-30
+# curate_drug_class.py / created by Ryo Honda, Last updated: 2025-04-20
 #========================================================================
 # This python script creates a summary table of sequence reads by:
 #	$ python3 crtDrugClass.py summary_reads.csv dir_arg dir_out
@@ -46,7 +46,8 @@ def main(file_reads, dir_in, dir_out):
             # warn if any duplicated sample names
             duplicate_names = dic_sample[dic_sample.duplicated()]
             if not duplicate_names.empty:
-                print("Warning: There are duplicated sample names.", list(duplicate_names))
+                print("Warning: There are duplicated sample names. Check the list in 'duplicated_sample_names.csv'")
+                duplicate_names.sort_values().to_csv(os.path.join(dir_out,'duplicated_sample_names.csv'), header=False)
             # covert the list to the dict type.
             dic_sample=dic_sample.to_dict()
             break

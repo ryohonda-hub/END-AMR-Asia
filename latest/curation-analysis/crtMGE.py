@@ -1,5 +1,5 @@
 #========================================================================
-# curate_MGE_profile.py ver.2 / created by Ryo Honda, Last updated: 2025-03-30
+# curate_MGE_profile.py ver.2 / created by Ryo Honda, Last updated: 2025-04-20
 #========================================================================
 # This python script creates a profile comparison table of multiple samples by:
 #	$ python3 crtMGE.py dir_in dir_out
@@ -54,7 +54,8 @@ def main(dir_in, dir_out):
             # warn if any duplicated sample names
             duplicate_names = dic_sample[dic_sample.duplicated()]
             if not duplicate_names.empty:
-                print("Warning: There are duplicated sample names.", list(duplicate_names))
+                print("Warning: There are duplicated sample names. Check the list in 'duplicated_sample_names.csv'")
+                duplicate_names.sort_values().to_csv(os.path.join(dir_out,'duplicated_sample_names.csv'), header=False)
             # covert the list to the dict type.
             dic_sample=dic_sample.to_dict()
             break
@@ -76,7 +77,6 @@ def main(dir_in, dir_out):
         print("["+args[0]+"] "+f+" merged.")
         
     # fill out NaN with zero (for the numeric columns only)
-    #df_joined=df_joined.fillna(0)
     df_joined[df_joined.select_dtypes(include=['number']).columns] = df_joined.select_dtypes(include=['number']).fillna(0)
 
     # sort the row indices by sum of each row
@@ -116,7 +116,7 @@ def main(dir_in, dir_out):
         file_out="MGE."+cat.replace(' ','_')+"."+param+".csv"
         df_sum.to_csv(os.path.join(dir_out,file_out))
         print("["+args[0]+"] "+file_out+" was created.")
-    print("["+args[0]+"] "+"completed.")
+    print(args[0]+" completed.")
 
 if __name__=="__main__":
     args=sys.argv
