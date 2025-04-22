@@ -69,7 +69,7 @@ def main(dir_in, dir_out):
     key.append(param) # create the list of columns to output
     for f in files_in: 
         df_sample=pd.read_table(f,header=0, dtype=dtype_dict)
-        sample_name=os.path.basename(f).replace(suffix,"")
+        sample_name=os.path.basename(f).removesuffix(suffix)
         df_sample=df_sample.reindex(columns=key).rename(columns={param: sample_name})
         #df_sample = df_sample.drop_duplicates(subset=key[:-1])  # remove duplicated data
         if df_joined.empty:

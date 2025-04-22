@@ -71,7 +71,7 @@ def main(dir_in, dir_out):
         # exclude the taxonomy with lower abundance than the threshold
         df_sample=df_sample[df_sample[param] > thres]
         # rename the column with the sequence file name
-        sample_name=os.path.basename(f).rstrip(suffix)
+        sample_name=os.path.basename(f).removesuffix(suffix)
         df_sample=df_sample.reindex(columns=key).rename(columns={param: sample_name})
         # merge the sample data
         if df_joined.empty:
@@ -81,7 +81,6 @@ def main(dir_in, dir_out):
         print("["+args[0]+"] "+f+" merged.")
         
     # fill out NaN with zero (for the numeric columns only)
-    #df_joined=df_joined.fillna(0)
     df_joined[df_joined.select_dtypes(include=['number']).columns] = df_joined.select_dtypes(include=['number']).fillna(0)
 
     # rename the columns as sample name
@@ -139,4 +138,3 @@ def main(dir_in, dir_out):
 if __name__=="__main__":
     args=sys.argv
     main(args[1],args[2])
-
