@@ -1,5 +1,5 @@
 #========================================================================
-# curate_16S_taxon.py ver.2 / created by Ryo Honda, Last updated: 2025-04-20
+# curate_16S_taxon.py ver.2 / created by Ryo Honda, Last updated: 2025-04-22
 #========================================================================
 # This python script creates a profile comparison table of multiple samples from mpa-style taxonomy read-count data by:
 #	$ python3 crt16S.py dir_in dir_out

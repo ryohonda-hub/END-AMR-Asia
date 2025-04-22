@@ -1,5 +1,5 @@
 #========================================================================
-# curate_ARG_profile.py ver.2 / created by Ryo Honda, Last updated: 2025-04-20
+# curate_ARG_profile.py ver.2 / created by Ryo Honda, Last updated: 2025-04-22
 #========================================================================
 # This python script creates a profile comparison table of multiple samples by:
 #	$ python3 crtARG.py dir_in dir_out

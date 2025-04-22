@@ -1,5 +1,5 @@
 #========================================================================
-# curate_drug_class.py / created by Ryo Honda, Last updated: 2025-04-20
+# curate_drug_class.py / created by Ryo Honda, Last updated: 2025-04-22
 #========================================================================
 # This python script creates a summary table of sequence reads by:
 #	$ python3 crtDrugClass.py summary_reads.csv dir_arg dir_out
@@ -80,7 +80,7 @@ def main(file_reads, dir_in, dir_out):
         drugs=pd.unique(drugs.dropna())
         
         # count RPK/RPK-16S of each drug class included in each ARG
-        df_arg[drugs]=0
+        df_arg[drugs]=0.0
         for d in drugs:
             rows_d=df_arg['Drug Class'].str.contains(d)
             df_arg.loc[rows_d, d]=df_arg.loc[rows_d, 'RPK/RPK-16S']
