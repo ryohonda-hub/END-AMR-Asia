@@ -22,7 +22,7 @@ DIR_MGE="${DIR_WORKING}/7.MGE_profile" # directory of MGE profile of each sample
 
 ## output directory 
 ## 結果出力するディレクトリ（絶対パスで指定。最後のスラッシュ '/' は含めない）
-DIR_SUM="${DIR_WORKING}/10.summary" # summary of reads
+DIR_SUM="${DIR_WORKING}/8.summary" # summary of reads
 
 ## location of the python script
 PY_SUM="${DIR_WORKING}/scripts/summary_reads_16S_ARG_MGE.py"

@@ -1,5 +1,5 @@
 #========================================================================
-# curate_16S_taxon.py ver.2 / created by Ryo Honda, Last updated: 2025-04-22
+# curate_16S_taxon.py ver.2 / created by Ryo Honda, Last updated: 2025-04-23
 #========================================================================
 # This python script creates a profile comparison table of multiple samples from mpa-style taxonomy read-count data by:
 #	$ python3 crt16S.py dir_in dir_out
@@ -76,9 +76,11 @@ def main(dir_in, dir_out):
         # merge the sample data
         if df_joined.empty:
             df_joined=df_sample # for the first data file
+            n_file=0
         else:
             df_joined=pd.merge(df_joined, df_sample, on=key[:-1], how='outer', copy=False)
-        print("["+args[0]+"] "+f+" merged.")
+            n_file+=1
+        print(f"[{args[0]}] {f} merged.")
         
     # fill out NaN with zero (for the numeric columns only)
     df_joined[df_joined.select_dtypes(include=['number']).columns] = df_joined.select_dtypes(include=['number']).fillna(0)
@@ -103,7 +105,7 @@ def main(dir_in, dir_out):
         os.makedirs(dir_out) # create the output directory if not existed.
     file_out='_merged.16S.'+param+suffix[-4:]
     df_joined.to_csv(os.path.join(dir_out,file_out),sep='\t',index=False)
-    print("["+args[0]+"] "+file_out+" was created.")
+    print(f"[{args[0]}] {file_out} was created.")
     
     # sort the row indices by sum of each row
     df_joined=df_joined.assign(sum=df_joined.sum(axis=1, numeric_only=True))
@@ -114,7 +116,7 @@ def main(dir_in, dir_out):
     df_pca=df_pca.set_index('taxonomy').T
     file_out='16S.'+param+'.mpa.csv'
     df_pca.to_csv(os.path.join(dir_out,file_out))
-    print("["+args[0]+"] "+file_out+" was created.")
+    print(f"[{args[0]}] {file_out} was created.")
     
     ## summary table for each taxonomy level
     for i, tx in enumerate(df_taxon.columns[1:]):
@@ -132,8 +134,8 @@ def main(dir_in, dir_out):
         # output the summary table
         file_out='16S.'+param+'.'+str(i+1)+'_'+tx+'.csv'
         df_pca.to_csv(os.path.join(dir_out,file_out),index=True)
-        print("["+args[0]+"] "+file_out+" was created.")
-    print(f"{args[0]} completed. There are {n_warn} warnings.")
+        print(f"[{args[0]}] {file_out} was created.")
+    print(f"{args[0]} completed. {n_file} files were curated. There are {n_warn} warnings.")
     
 if __name__=="__main__":
     args=sys.argv

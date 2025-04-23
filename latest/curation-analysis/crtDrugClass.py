@@ -31,7 +31,7 @@ def main(file_reads, dir_in, dir_out):
     # get the list of the profile files in the input directory
     files_in=sorted(glob.glob(os.path.join(dir_in,"*"+suffix)))
     n=len(files_in)
-    print("["+args[0]+"] started. ("+str(n)+" profiles are found.)")
+    print(f"{args[0]}] started. ({n} profiles are found.)")
     
     # create the output directory if not existed.
     if not os.path.isdir(dir_out):
@@ -89,7 +89,7 @@ def main(file_reads, dir_in, dir_out):
         if output_each_profile:
             file_out=os.path.join(dir_out, sample_name+'.ARG_profile+drug_class.tsv')
             df_arg.to_csv(file_out,sep='\t',index=False)
-            print("["+args[0]+"] "+file_out+" was created. ("+str(i)+"/"+str(n)+")")
+            print(f"[{args[0]}] {file_out} was created. ({i}/{n})")
         
         ##======= create the aggregated summary file ============================
         # calculate the sum for each drug class, and merge in the summary file
@@ -132,21 +132,21 @@ def main(file_reads, dir_in, dir_out):
             df_sum_single.to_excel(writer, sheet_name='single_ARG')
             df_sum_nonefflux.to_excel(writer, sheet_name='non-efflux')
             df_sum_efflux.to_excel(writer, sheet_name='efflux')
-        print("["+args[0]+"] "+file_xlsx+" was created.")
+        print(f"[{args[0]}] {file_xlsx} was created.")
     else:
         # output the aggregated summary to csv files
         file_out=os.path.join(dir_out, 'ARG.drug_class.all.per_16S.csv')
         df_sum_all.to_csv(file_out)
-        print("["+args[0]+"] "+file_out+" was created.")
+        print(f"[{args[0]}] {file_out} was created.")
         file_out=os.path.join(dir_out, 'ARG.drug_class.single.per_16S.csv')
         df_sum_single.to_csv(file_out)
-        print("["+args[0]+"] "+file_out+" was created.")
+        print(f"[{args[0]}] {file_out} was created.")
         file_out=os.path.join(dir_out, 'ARG.drug_class.nonefflux.per_16S.csv')
         df_sum_nonefflux.to_csv(file_out)
-        print("["+args[0]+"] "+file_out+" was created.")
+        print(f"[{args[0]}] {file_out} was created.")
         file_out=os.path.join(dir_out, 'ARG.drug_class.efflux.per_16S.csv')
         df_sum_efflux.to_csv(file_out)
-        print("["+args[0]+"] "+file_out+" was created.")
+        print(f"[{args[0]}] {file_out} was created.")
     print(f"{args[0]} completed. There are {n_warn} warnings.")
 
 if __name__=="__main__":

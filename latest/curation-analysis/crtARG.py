@@ -1,5 +1,5 @@
 #========================================================================
-# curate_ARG_profile.py ver.2 / created by Ryo Honda, Last updated: 2025-04-22
+# curate_ARG_profile.py ver.2 / created by Ryo Honda, Last updated: 2025-04-23
 #========================================================================
 # This python script creates a profile comparison table of multiple samples by:
 #	$ python3 crtARG.py dir_in dir_out
@@ -76,9 +76,11 @@ def main(dir_in, dir_out):
         df_sample = df_sample.drop_duplicates(subset=key[:-1])  # remove duplicated data
         if df_joined.empty:
             df_joined=df_sample # for the first data file
+            n_file=0
         else:
             df_joined=pd.merge(df_joined, df_sample, on=key[:-1], how='outer')
-        print("["+args[0]+"] "+f+" merged.")
+            n_file+=1
+        print(f"[{args[0]}] {f} merged.")
     
     # fill out NaN with zero (for the numeric columns only)
     df_joined[df_joined.select_dtypes(include=['number']).columns] = df_joined.select_dtypes(include=['number']).fillna(0)
@@ -93,7 +95,7 @@ def main(dir_in, dir_out):
         os.makedirs(dir_out) # create the output directory if not existed.
     file_out='_merged'+suffix[0:-4]+'.'+param+suffix[-4:]
     df_joined_out.to_csv(os.path.join(dir_out,file_out),sep='\t',index=False)
-    print("["+args[0]+"] "+"Merged profile was created.")
+    print(f"[{args[0]}] Merged profile was created.")
     
     ######### Summation by args categories ###############################
     # list of the sample columns to aggregate
@@ -115,8 +117,8 @@ def main(dir_in, dir_out):
         # output the summary file.
         file_out="ARG."+cat.replace(' ','_')+"."+param+".csv"
         df_sum.to_csv(os.path.join(dir_out,file_out))
-        print("["+args[0]+"] "+file_out+" was created.")
-    print(f"{args[0]} completed. There are {n_warn} warnings.")
+        print(f"[{args[0]}] {file_out} was created.")
+    print(f"{args[0]} completed. {n_file} files were curated. There are {n_warn} warnings.")
     
 if __name__=="__main__":
     args=sys.argv

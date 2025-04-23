@@ -33,7 +33,7 @@ def main(dir_qt, dir_16s, dir_arg, dir_mge, dir_out):
     ## get the file list in the input directory
     files_qt=sorted(glob.glob(os.path.join(dir_qt,"*"+sfx_qt)))
     i=0; n=len(files_qt)
-    print("["+args[0]+"] started. ("+str(i)+"/"+str(n)+")")
+    print(f"{args[0]}] started. ({i}/{n})")
     
     ## create an output dataframe
     df_out=pd.DataFrame(columns=['Raw sequence reads','Quality sequence reads','Total 16S reads','Total ARG reads','Total MGE reads','Total RPK of 16S','Total RPK of ARG','Total ARG abundance (RPK/RPK-16S)','Total RPK of MGE','Total MGE abundance (RPK/RPK-16S)'])
@@ -75,14 +75,14 @@ def main(dir_qt, dir_16s, dir_arg, dir_mge, dir_out):
         # add in the output dataframe
         df_out.loc[name]=[reads_before_qt, reads_after_qt,reads_16s,reads_arg,reads_mge,rpk_16s,rpk_arg,abundance_arg,rpk_mge,abundance_mge]
         i+=1
-        print("["+args[0]+"] "+name+" is done.("+str(i)+"/"+str(n)+")")
+        print(f"[{args[0]}] {name} is done.({i}/{n})")
     
     # output to a csv file
     if not os.path.isdir(dir_out):
         os.makedirs(dir_out) # create the output directory if not existed.
     file_out=os.path.join(dir_out,'_summary_reads_16S_ARG_MGE.csv')
     df_out.to_csv(file_out,sep=',',index=True)
-    print("["+args[0]+"] "+file_out+" was created. ("+str(i)+"/"+str(n)+")")
+    print(f"[{args[0]}] {file_out} was created. ({i}/{n})")
     
 if __name__=="__main__":
     args=sys.argv

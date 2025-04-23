@@ -63,14 +63,14 @@ def main(f_in, dir_out):
     sfx_scaling = ".scaling" if scaling else ".no_scaling"
     file_scores=os.path.join(dir_out,'pca_scores.'+os.path.splitext(os.path.basename(f_in))[0]+sfx_scaling+'.csv')
     pca_scores_df.to_csv(file_scores)
-    print("["+args[0]+"] "+file_scores+" was created.")
+    print(f"[{args[0]}] {file_scores} was created.")
     
     # output PC loadings in a csv file / 各成分の負荷量をCSVファイルに出力
     loadings_df = pd.DataFrame(loadings, index=params, columns=['PC{}'.format(i+1) for i in range(len(data_num))])
     loadings_df=loadings_df.sort_values('PC1',ascending=False)
     file_loadings=os.path.join(dir_out, 'pca_loadings.'+os.path.splitext(os.path.basename(f_in))[0]+sfx_scaling+'.csv')
     loadings_df.to_csv(file_loadings)
-    print("["+args[0]+"] "+file_loadings+" was created.")
+    print(f"[{args[0]}] {file_loadings} was created.")
     
     # Output as an Excel file / Excelファイルに出力
     file_xlsx=os.path.join(dir_out, 'pca.'+os.path.splitext(os.path.basename(f_in))[0]+sfx_scaling+'.xlsx')
