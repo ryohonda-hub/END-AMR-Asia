@@ -32,10 +32,12 @@ LISTING="0"
 ## For Case 1: Specify the text file of sequence list and newline code
 ## 1の場合: 配列名一覧のファイルと改行コードを指定
 FILE_LIST="${DIR_WORKING}/sralist-all.txt"
-IFS=$'\n' # '\n' for Mac/Unix, '\r\n' for Windows.
-## [IMPORTANT] Specify the correct newline code in IFS. 
-## 【重要】ファイルに使われている正しい改行コードをIFSに指定。
-##  UNIX/Mac uses LF(\n); Windows uses CR+LF (\r\n)
+## [IMPORTANT] In the sample list file,
+## (1) specify 'LF' as the newline code. (Warning: Windows OS uses 'CR+LF' as default. You should specify the newline code when you save the list file.)
+## (2) end with a blank line (Add a linefeed after the last sample. Otherwise, the last sample will be ignored.)
+##【重要】配列名一覧ファイルでは
+## (1) 改行コードは「LF」と指定すること （Windowsでは CR+LFなので，変更して保存すること）
+## (2) 最後は空行とすること（最後のサンプル名の後にも改行を忘れずに入れること。そうしないと最後のサンプルがスキップされます）
 #----------------------------------------
 
 # Directories and files
@@ -86,7 +88,9 @@ DATE=$(date '+%Y-%m-%d %H:%M:%S %z')
 i=0; n=${#LIST[@]}
 echo "[${DATE}] $JOB_NAME started. (${i}/${n})"
 ## create output directories if not existed
-dir_rep="${DIR_16S}/reports"; mkdir -p ${DIR_16S} ${dir_rep} ${DIR_SUM}
+mkdir -p ${DIR_16S} ${DIR_SUM}
+dir_rep="${DIR_16S}/reports"; mkdir -p ${dir_rep}; trap 'rm -R ${dir_rep}' 0
+
 
 ## Run for each file
 for SAMPLE in "${LIST[@]}"; do
@@ -114,37 +118,31 @@ for SAMPLE in "${LIST[@]}"; do
 	singularity exec ${BRACKEN} \
 	bracken -d ${DIR_DB} -i ${dir_rep}/${SAMPLE}.report.kr2\
 	 -o ${DIR_16S}/${SAMPLE}_5.genus.tsv\
-	 -w ${dir_rep}/${SAMPLE}.report_5.genus.bk.kr2\
 	 -r $rlen -l G
 	## bracken - family level
 	singularity exec ${BRACKEN} \
 	bracken -d ${DIR_DB} -i ${dir_rep}/${SAMPLE}.report.kr2\
 	 -o ${DIR_16S}/${SAMPLE}_4.family.tsv\
-	 -w ${dir_rep}/${SAMPLE}.report_4.family.bk.kr2\
 	 -r $rlen -l F
 	## bracken - order level
 	singularity exec ${BRACKEN} \
 	bracken -d ${DIR_DB} -i ${dir_rep}/${SAMPLE}.report.kr2\
 	 -o ${DIR_16S}/${SAMPLE}_3.order.tsv\
-	 -w ${dir_rep}/${SAMPLE}.report_3.order.bk.kr2\
 	 -r $rlen -l O
 	## bracken - class level
 	singularity exec ${BRACKEN} \
 	bracken -d ${DIR_DB} -i ${dir_rep}/${SAMPLE}.report.kr2\
 	 -o ${DIR_16S}/${SAMPLE}_2.class.tsv\
-	 -w ${dir_rep}/${SAMPLE}.report_2.class.bk.kr2\
 	 -r $rlen -l C
 	## bracken - phylum level
 	singularity exec ${BRACKEN} \
 	bracken -d ${DIR_DB} -i ${dir_rep}/${SAMPLE}.report.kr2\
 	 -o ${DIR_16S}/${SAMPLE}_1.phylum.tsv\
-	 -w ${dir_rep}/${SAMPLE}.report_1.phylum.bk.kr2\
 	 -r $rlen -l P
 	## bracken - domain level
 	singularity exec ${BRACKEN} \
 	bracken -d ${DIR_DB} -i ${dir_rep}/${SAMPLE}.report.kr2\
 	 -o ${DIR_16S}/${SAMPLE}_0.domain.tsv\
-	 -w ${dir_rep}/${SAMPLE}.report_0.domain.bk.kr2\
 	 -r $rlen -l D
 	
 	## record the progress

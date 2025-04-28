@@ -30,10 +30,12 @@ LISTING="1"
 ## For Case 1: Specify the text file of sequence list and newline code
 ## 1の場合: 配列名一覧のファイルと改行コードを指定
 FILE_LIST="${DIR_WORKING}/sralist.txt"
-IFS=$'\n' # '\n' for Mac/Unix, '\r\n' for Windows.
-## [IMPORTANT] Specify the correct newline code in IFS. 
-## 【重要】ファイルに使われている正しい改行コードをIFSに指定。
-##  UNIX/Mac uses LF(\n); Windows uses CR+LF (\r\n)
+## [IMPORTANT] In the sample list file,
+## (1) specify 'LF' as the newline code. (Warning: Windows OS uses 'CR+LF' as default. You should specify the newline code when you save the list file.)
+## (2) end with a blank line (Add a linefeed after the last sample. Otherwise, the last sample will be ignored.)
+##【重要】配列名一覧ファイルでは
+## (1) 改行コードは「LF」と指定すること （Windowsでは CR+LFなので，変更して保存すること）
+## (2) 最後は空行とすること（最後のサンプル名の後にも改行を忘れずに入れること。そうしないと最後のサンプルがスキップされます）
 #----------------------------------------
 
 # Directories and files
