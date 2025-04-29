@@ -1,5 +1,5 @@
 #==============================================================================
-# make_MGE_prof.py ver.2.1 / created by Ryo Honda, Last updated: 2025-04-20
+# make_MGE_prof.py ver.2.1 / created by Ryo Honda, Last updated: 2025-04-29
 #==============================================================================
 # This python script creates ARG profile data by merging gene information from the CARD catalog with read count data using ARO as index by:
 #	$ python3 makeMGEprof.py catalog_file blast_results dir_out
@@ -26,7 +26,7 @@ def main(file_cat, file_blast, dir_out):
     
     # import the database catalog and blast results
     df_catalog=pd.read_table(file_cat,header=0)
-    df_blast=pd.read_table(file_blast,header=0)
+    df_blast=pd.read_table(file_blast,header=None)
     # remove empty columns in MGEDB catalog and define column titles.
     df_catalog=df_catalog.dropna(how='all', axis=1) 
     df_catalog.columns=['sseqid','Function','gene name']
