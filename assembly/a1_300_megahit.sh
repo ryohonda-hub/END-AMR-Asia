@@ -49,7 +49,6 @@ FILE_LIST="${DIR_WORKING}/sh/sralist.txt"
 
 # Assembly options
 MIN_CTG=300
-K_LIST="27,37,47,57,67,77,87,97,107,117,127"
 ## location of the python script
 PY_CHK="${DIR_WORKING}/scripts/chfa.py"
 #====== Singularity (AppContainer) settings ==============================
@@ -90,7 +89,7 @@ for SAMPLE in "${LIST[@]}"; do
 	singularity exec ${MEGAHIT} \
 	megahit -1 ${DIR_QT}/${SAMPLE}${sfx_r1} -2 ${DIR_QT}/${SAMPLE}${sfx_r2}\
 	 -o ${DIR_CTG}/${SAMPLE} --out-prefix ${SAMPLE}\
-	 --k-list ${K_LIST} --min-contig-len ${MIN_CTG}\
+	 --min-contig-len ${MIN_CTG}\
 	 -t ${threads} 
 
 	# check contig length

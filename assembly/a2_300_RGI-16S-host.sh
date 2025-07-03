@@ -108,7 +108,7 @@ for SAMPLE in "${LIST[@]}"; do
 	singularity exec ${RGI} \
 	rgi main\
      -i ${DIR_CTG}/${SAMPLE}/${SAMPLE}${sfx_fa}\
-     -o ${DIR_ARG}/${SAMPLE}_ARGI\
+     -o ${DIR_ARG}/${SAMPLE}\
      -t contig -a DIAMOND -n ${threads}\
      --local --clean --low_quality --include_loose
 	

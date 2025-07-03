@@ -41,10 +41,11 @@ def main(dir_in, dir_out):
     'Drug Class': 'category',
     'MAR': 'int8',
     'Resistance Mechanism': 'category',
-    'slen': 'int32',
+    'slen': 'float32',
     param: 'float32'
     }
     n_warn=0 # count warning
+    n_file=0 # count processed files
     # get the list of the profile files in the input directory
     files_in=sorted(glob.glob(os.path.join(dir_in,"*"+suffix)))
     # create the dictionary of sample names corresponding to sequence names
