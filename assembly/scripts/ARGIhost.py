@@ -1,38 +1,39 @@
 #==============================================================================
-# ARGIhost.py ver.1.0 / created by Ryo Honda, Last updated: 2025-04-29
+# ARGIhost.py ver.2 / created by Ryo Honda, Last updated: 2025-10-22
 #==============================================================================
 # This python script creates a ARG-host table from ARG and taxonomy profiles of a contig by:
-#	$ python3 ARGIhost.py names.dump rgi_results.txt taxonomy_results.tsv dir_out
+#	$ python3 ARGIhost.py kraken2_index rgi_results.txt taxonomy_results.tsv dir_out
 #
-#  names.dump = NCBI taxdump database 
+#  kraken2_index = the Inspect file of Kraken2 index. (refer https://benlangmead.github.io/aws-indexes/k2)
 #  rgi_results.txt = RGI output file for ARG
 #  taxonomy_results.tsv = Kraken taxonomy table
 #  dir_out = output directory, or use "." to specify the current directory
 #
-# The output file with suffix of ".ARG-host.tsv" is created in the output directory. 
+# The output file with suffix of ".ARGhost.tsv" is created in the output directory. 
 # The output file contains gene information and proportion of RPK.
 #------------------------------------------------------------------------------
 import os
 import sys
 import pandas as pd
 
-def main(names_dmp_file, arg_file, taxon_file, dir_out):
+def main(idx_file, arg_file, taxon_file, dir_out):
     #====== load taxonomy file ======
     df_tax = pd.read_csv(taxon_file, sep='\t', header=None, names=['status', 'contig_id', 'taxid', 'kmer_count', 'classification_info'])
-    # load taxonomy names.dump
+    # load taxonomy index of kraken2 and create the dictionary
     dict_taxon= {}
-    with open(names_dmp_file, 'r') as f:
-        for line in f:
-            cols = line.strip().split('\t|\t')
-            taxid, name_txt, _, name_class = cols
-            if name_class.strip() == "scientific name":
-                dict_taxon[int(taxid.strip())] = name_txt.strip()
+    with open(idx_file, 'r') as f:
+        for i, line in enumerate(f):
+            if i<7: continue    # ignore header lines
+            cols = line.strip().split('\t')
+            _, _, _, rank, taxid, name_txt = cols
+            dict_taxon[int(taxid.strip())] = [rank, name_txt.strip()]
                 
     ## create contig-taxonomy table
     df_tax = df_tax[df_tax['status'] == 'C'].copy() # Remove Unclassified (U)
     df_tax['contig_id'] = df_tax['contig_id'].str.strip()
     # convert taxid into taxonomy names
-    df_tax['Species'] = df_tax['taxid'].map(dict_taxon)
+#    df_tax['Species'] = df_tax['taxid'].map(dict_taxon)
+    df[['rank', 'taxonomy']] = pd.DataFrame(df['taxid'].map(dict_taxon).tolist(), index=df.index)
     df_tax['Species'] = df_tax['Species'].fillna('Unknown')
     
     # output the contig-taxonomy table
@@ -71,7 +72,7 @@ def main(names_dmp_file, arg_file, taxon_file, dir_out):
 
     # output the ARG-taxonomy table (summary)
     file_out=os.path.splitext(os.path.basename(arg_file))[0]
-    file_out=os.path.join(dir_out,file_out.removesuffix('.ARGI')+".ctg.ARGhost.summary.tsv")
+    file_out=os.path.join(dir_out,file_out.removesuffix('.ARG_profile')+".ctg.ARGhost.summary.tsv")
     df_merged.to_csv(file_out, sep='\t', index=False)
 
 if __name__ == "__main__":
