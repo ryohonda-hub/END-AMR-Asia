@@ -118,7 +118,7 @@ for SAMPLE in "${LIST[@]}"; do
 	echo "[${DATE}] ${SAMPLE}: Creating the ARG profile table."
 
 	## Create the ARG profile table
-	python3 ${PY_PROF} ${DIR_CARD}/${DB_CARD} ${DIR_ARG}/${SAMPLE}_ARGI.txt ${DIR_PROF}
+	python3 ${PY_PROF} ${DIR_CARD}/${DB_CARD} ${DIR_ARG}/${SAMPLE}.ARG_profile.tsv ${DIR_PROF}
 	
 	## record the progress
 	DATE=$(date '+%Y-%m-%d %H:%M:%S %z')
