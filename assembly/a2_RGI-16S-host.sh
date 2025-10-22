@@ -58,8 +58,8 @@ FILE_LIST="${DIR_WORKING}/sh/sralist.txt"
 DIR_CARD="/home/ryohonda/db/CARD-3.2.6"
 DB_CARD="card.json"	# specify CARD JSON file for RGI
 DIR_SILVA="/home/ryohonda/db/SILVA-138_k2"
-DIR_TAXDMP="/home/ryohonda/db/taxdump"
-DB_TAXDMP="names.dmp"
+DIR_TAXDMP="/home/ryohonda/db/kraken2/GTDBv226"
+DB_TAXDMP="inspect.txt"
 ## location of the python script
 PY_PROF="${DIR_WORKING}/scripts/ARGIprof.py"
 PY_HOST="${DIR_WORKING}/scripts/ARGIhost.py"
