@@ -7,7 +7,7 @@ library(readr)
 # ------------------------------------------------------------------
 # ディレクトリとファイル
 # ------------------------------------------------------------------
-OUT_DIR <- "/home/ryohonda/16S_SILVA/output"
+OUT_DIR <- "/home/username/16S_SILVA/output"
 ASV_RDS <- file.path(OUT_DIR, "ASV_nochim.rds")
 TAX_RDS <- file.path(OUT_DIR, "taxonomy.rds")
 

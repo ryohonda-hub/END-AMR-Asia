@@ -7,4 +7,4 @@
 #SBATCH --mem=32G      # 100サンプル超えないなら十分(必要に応じて変更)
 
 # スクリプト実行（★パス変更）
-Rscript /home/username/16S/SILVA/scripts/s1_dada2_pipeline.r
+Rscript /home/username/16S_SILVA/scripts/s1_dada2_pipeline.r
