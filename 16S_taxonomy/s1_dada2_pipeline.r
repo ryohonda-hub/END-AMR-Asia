@@ -14,7 +14,7 @@ library(readr)
 ## プロジェクトの基準ディレクトリ（★必ず自分の場所に変更）→ 全ての解析結果(output)がここにまとまる
 PROJECT_DIR <- "/home/ryohonda/16S_SILVA"  
 ## FASTQ が置いてあるディレクトリ(必ず一か所にまとめる)
-FASTQ_DIR   <- file.path(PROJECT_DIR, "Raw_fastq")
+FASTQ_DIR   <- file.path(PROJECT_DIR, "raw_fastq")
 # → 出力ディレクトリ
 OUT_DIR     <- file.path(PROJECT_DIR, "output")  # ★自動作成
 
