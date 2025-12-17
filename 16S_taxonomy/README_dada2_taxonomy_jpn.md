@@ -59,11 +59,11 @@ FASTQ配置 → メイン解析(js1) → 結果確認 → 後処理(js2) → 完
 **手順:**
 
 1. 自分のパソコンで、生物技研から返却された **「16S解析結果フォルダ」** を開く
-2. その中の **`Raw_fastq/`** フォルダを開く
+2. その中の **`raw_fastq/`** フォルダを開く
 3. 中にある **すべての `*.fastq.gz` ファイル** を、NIGスパコンの以下のディレクトリにコピー:
 
 ```bash
-~/16S_SILVA/Raw_fastq/
+~/16S_SILVA/raw_fastq/
 ```
 
 **注意事項:**
@@ -101,11 +101,11 @@ mkdir -p ~/log
 
 ### 3-1. ディレクトリ構造
 
-**構成例（小林の場合）:**
+**構成例:**
 
 ```
 ~/16S_SILVA/                    ← プロジェクトルート
-├── Raw_fastq/                  ← FASTQファイル置き場
+├── raw_fastq/                  ← FASTQファイル置き場
 │   ├── Sample1_R1_001.fastq.gz
 │   ├── Sample1_R2_001.fastq.gz
 │   ├── Sample2_R1_001.fastq.gz
@@ -160,7 +160,7 @@ PROJECT_DIR <- "/home/username/16S_SILVA"
 ```r
 # ★自分のユーザー名に変更
 PROJECT_DIR <- "/home/username/16S_SILVA"
-FASTQ_DIR   <- file.path(PROJECT_DIR, "Raw_fastq")
+FASTQ_DIR   <- file.path(PROJECT_DIR, "raw_fastq")
 OUT_DIR     <- file.path(PROJECT_DIR, "output")
 ```
 
