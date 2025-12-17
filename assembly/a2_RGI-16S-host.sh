@@ -58,8 +58,10 @@ FILE_LIST="${DIR_WORKING}/sh/sralist.txt"
 DIR_CARD="/home/ryohonda/db/CARD-3.2.6"
 DB_CARD="card.json"	# specify CARD JSON file for RGI
 DIR_SILVA="/home/ryohonda/db/SILVA-138_k2"
-DIR_TAXDMP="/home/ryohonda/db/kraken2/GTDBv226"
-DB_TAXDMP="inspect.txt"
+DIR_TAXDMP="/home/ryohonda/db/taxdump"
+DB_TAXDMP="names.dmp"
+DIR_GTDB="/home/ryohonda/db/kraken2/GTDBv226"
+DB_GTDB="inspect.txt"
 ## location of the python script
 PY_PROF="${DIR_WORKING}/scripts/ARGIprof.py"
 PY_HOST="${DIR_WORKING}/scripts/ARGIhost.py"
@@ -67,7 +69,7 @@ PY_HOST="${DIR_WORKING}/scripts/ARGIhost.py"
 #====== Singularity (AppContainer) settings ==============================
 # Singularity: ** specify the directory of other users if you need to refer from singularity.
 # Singularity: **他のユーザのファイルをsingularityから参照する場合は次で指定 **必要ない場合は削除**
-export SINGULARITY_BINDPATH="${DIR_CARD},${DIR_SILVA},${DIR_TAXDMP}"
+export SINGULARITY_BINDPATH="${DIR_CARD},${DIR_SILVA},${DIR_TAXDMP},${DIR_GTDB}"
 ## Singularity: location of the container images of the singularity package
 RGI="/usr/local/biotools/r/rgi:6.0.3--pyha8f3691_1"
 KRAKEN2="/usr/local/biotools/k/kraken2:2.1.2--pl5321h9f5acd7_3"
@@ -180,7 +182,7 @@ for SAMPLE in "${LIST[@]}"; do
 	echo "[${DATE}] ${SAMPLE}: Phylogenetic analysis by kraken2 is done. (${i}/${n})"
 	
 	# Create ARG-host table
-	python3 ${PY_HOST} ${DIR_TAXDMP}/${DB_TAXDMP} ${DIR_ARG}/${SAMPLE}_ARGI.txt ${DIR_16S}/${SAMPLE}.kraken2.tsv ${DIR_SUM}
+	python3 ${PY_HOST} ${DIR_GTDB}/${DB_GTDB} ${DIR_ARG}/${SAMPLE}_ARGI.txt ${DIR_16S}/${SAMPLE}.kraken2.tsv ${DIR_SUM}
 done
 # Unload CARD database
 singularity exec ${RGI} \
