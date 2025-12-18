@@ -61,10 +61,10 @@ df[sample_cols] <- lapply(df[sample_cols], function(x){
     as_num
 })
 
-# 相対存在量(%)計算
+# 相対存在割合の計算
 sample_sums <- colSums(df[sample_cols], na.rm=TRUE)
 df_relabund <- df
-df_relabund[sample_cols] <- sweep(df[sample_cols], 2, sample_sums, FUN="/")*100
+df_relabund[sample_cols] <- sweep(df[sample_cols], 2, sample_sums, FUN="/")
 write_tsv(df_relabund, file.path(OUT_DIR, "ASV_results_relabund.tsv"))
 
 # 階層別集計関数
