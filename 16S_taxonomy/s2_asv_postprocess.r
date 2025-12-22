@@ -5,9 +5,10 @@ library(dplyr)
 library(readr)
 
 # ------------------------------------------------------------------
-# ディレクトリとファイル
+# ディレクトリとファイル  ** Configure directories  **
 # ------------------------------------------------------------------
-OUT_DIR <- "/home/username/16S_SILVA/output"
+OUT_DIR <- "/home/username/16S_SILVA/output"	# [MUST EDIT] Output directory / 出力ディレクトリ
+
 ASV_RDS <- file.path(OUT_DIR, "ASV_nochim.rds")
 TAX_RDS <- file.path(OUT_DIR, "taxonomy.rds")
 

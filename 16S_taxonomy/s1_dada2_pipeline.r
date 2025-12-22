@@ -1,6 +1,6 @@
 ############################################################
-# 16S rRNA V3–V4（341f/805r）ASV 解析テンプレート（HPC版）
-# R 4.5+ / DADA2 / SILVA v138.2
+# 16S rRNA V3–V4（341f/805r）ASV Analysis (HPC version)
+# with R 4.5+ / DADA2 / SILVA v138.2
 ############################################################
 
 library(dada2)
@@ -9,16 +9,16 @@ library(dplyr)
 library(readr)
 
 # ------------------------------------------------------------------
-# 1. ディレクトリ設定（★必ず変更）
+# 1. ディレクトリ設定（★必ず変更） ** Configure directories [MUST EDIT] **
 # ------------------------------------------------------------------
-## プロジェクトの基準ディレクトリ（★必ず自分の場所に変更）→ 全ての解析結果(output)がここにまとまる
+## Project root directory / プロジェクトの基準ディレクトリ（★必ず自分の場所に変更）→ 全ての解析結果(output)がここにまとまる
 PROJECT_DIR <- "/home/username/16S_SILVA"  
-## FASTQ が置いてあるディレクトリ(必ず一か所にまとめる)
+## Directory of fastq files / FASTQ が置いてあるディレクトリ(必ず一か所にまとめる)
 FASTQ_DIR   <- file.path(PROJECT_DIR, "raw_fastq")
-# → 出力ディレクトリ
+# Output directory / 出力ディレクトリ
 OUT_DIR     <- file.path(PROJECT_DIR, "output")  # ★自動作成
 
-## Silva データベースのパス
+## Path to Silva database / Silva データベースのパス
 silva_file <- "/home/ryohonda/db/dada2/SILVA_138.2/silva_nr99_v138.2_toGenus_trainset.fa.gz"   # ★ここを先生のdbのパスに変更
 
 if (!dir.exists(OUT_DIR)) dir.create(OUT_DIR, recursive = TRUE)
