@@ -92,7 +92,7 @@ write_tsv(ASV_Genus,   file.path(OUT_DIR,"ASV_Genus.tsv"))
 # ワークスペース保存
 save.image(file.path(OUT_DIR,"dada2_post_workspace.RData"))
 
-cat("\n============ ASV後処理完了 ============\n")
+cat("\n============ Done/ASV後処理完了 ============\n")
 cat("出力ファイル:\n")
 cat("ASV_sequences.fasta, ASV_counts.tsv, ASV_taxonomy.tsv, ASV_results.tsv, ASV_results_relabund.tsv\n")  
-cat("階層別集計: ASV_Kingdom~ASV_Genus.tsv\n")
+cat("Summary by taxonomic rank/階層別集計: ASV_Kingdom~ASV_Genus.tsv\n")

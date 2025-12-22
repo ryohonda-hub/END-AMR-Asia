@@ -647,3 +647,8 @@ R2: CGTAGCTAGCTA...（Reverse read）
 3. 一致しない場合 → マージ失敗（そのreadは捨てられる）
 ```
 
+---
+
+End of document.
+
+```
