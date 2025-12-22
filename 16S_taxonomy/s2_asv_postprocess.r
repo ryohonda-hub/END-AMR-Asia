@@ -7,7 +7,8 @@ library(readr)
 # ------------------------------------------------------------------
 # ディレクトリとファイル  ** Configure directories  **
 # ------------------------------------------------------------------
-OUT_DIR <- "/home/username/16S_SILVA/output"	# [MUST EDIT] Output directory / 出力ディレクトリ
+# [CHECK] Specify the output directory of the ASV analysis script / ASV解析スクリプトの出力ディレクトリを指定
+OUT_DIR <- "/home/username/16S_SILVA/output"	
 
 ASV_RDS <- file.path(OUT_DIR, "ASV_nochim.rds")
 TAX_RDS <- file.path(OUT_DIR, "taxonomy.rds")
