@@ -633,9 +633,9 @@ Primer                                        Primer
 
 [How Illumina reads]
 R1 (Forward) →→→→→→→→→
-5'==================================================3'
-3'==================================================5'
-←←←←←←←←← R2 (Reverse)
+           5'==================================================3'
+           3'==================================================5'
+                                                     ←←←←←←←←← R2 (Reverse)
 
 * R1: Read forward from the 5' end (typically 280–300 bp)
 * R2: Read backward from the 3' end (typically 220–280 bp)
@@ -661,21 +661,21 @@ R1 (Forward) →→→→→→→→→
 
 [Case with overlap (normal)]
 
-R1: 280 bp read
+  R1: 280 bp read
 5'━━━━━━━━━━━━━━━━━━━━━━━━━━━→
-■■■■■■■  ← overlapping region
-←━━━━━━━━━━━━━━━━━━━━━━3'
-R2: 220 bp read
+                      ■■■■■■■  ← overlapping region
+                     ←━━━━━━━━━━━━━━━━━━━━━━3'
+                      R2: 220 bp read
 
 Overlap = 280 + 220 − 460 = 40 bp
 
 [Case without overlap (merge failure)]
 
-R1: 240 bp read
+  R1: 240 bp read
 5'━━━━━━━━━━━━━━━━→
-?????? ← unread region (gap)
-←━━━━━━━━━━━━━3'
-R2: 180 bp read
+                   ?????? ← unread region (gap)
+                         ←━━━━━━━━━━━━━3'
+                          R2: 180 bp read
 
 Overlap = 240 + 180 − 460 = −40 bp (negative!)
 → Cannot be merged!
