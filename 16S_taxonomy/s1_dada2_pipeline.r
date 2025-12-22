@@ -31,7 +31,7 @@ fnFs <- sort(list.files(FASTQ_DIR, pattern="_R1_001.fastq.gz", full.names = TRUE
 fnRs <- sort(list.files(FASTQ_DIR, pattern="_R2_001.fastq.gz", full.names = TRUE))
 
 sample.names <- sapply(strsplit(basename(fnFs), "_"), `[`, 1)
-cat("検出サンプル数:", length(sample.names), "\n")  # ★サンプル数自動検出
+cat("No. of samples/検出サンプル数:", length(sample.names), "\n")  # ★サンプル数自動検出
 
 # ------------------------------------------------------------------
 # 3. フィルタリングフォルダ作成
