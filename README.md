@@ -10,7 +10,7 @@ All shell scripts are coded to work on the [NIG supercomputer](https://sc.ddbj.n
 ### Citation
 When publishing work that uses these scripts, please cite the corresponding reference in the [pub](https://github.com/ryohonda-hub/END-AMR-Asia/tree/main/pub) directory or:
 
-Ryo Honda, Norihisa Matsuura, Hiroe Hara-Yamamura, Sovannlaksmy Sorn, Yuta Morinaga, Van Huy Than, Muhammad Adnan Sabar, Yalkhin Masakke, Sawako Asakura, Toru Watanabe (2023) Transition of antimicrobial resistome in wastewater treatment plants: impact of process configuration, geographical location and season. npj Clean Water 6, 46. [DOI: 10.1038/s41545-023-00261-x](https://doi.org/10.1038/s41545-023-00261-x)
+* Ryo Honda, Norihisa Matsuura, Hiroe Hara-Yamamura, Sovannlaksmy Sorn, Yuta Morinaga, Van Huy Than, Muhammad Adnan Sabar, Yalkhin Masakke, Sawako Asakura, Toru Watanabe (2023) Transition of antimicrobial resistome in wastewater treatment plants: impact of process configuration, geographical location and season. npj Clean Water 6, 46. [DOI: 10.1038/s41545-023-00261-x](https://doi.org/10.1038/s41545-023-00261-x)
 
 ### Website & Contact
 https://env.w3.kanazawa-u.ac.jp/end-amr-asia/
