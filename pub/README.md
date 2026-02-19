@@ -8,6 +8,8 @@ Shell scripts are coded to work on the [NIG supercomputer](https://sc.ddbj.nig.a
 
 * Mardalisa, Rongxuan Wang, Muhammad Adnan Sabar, Norihisa Matsuura, Hiroe Hara-Yamamura, Ryo Honda* (2025) Different fates between extracellular and intracellular antimicrobial resistome in full-scale activated sludge and membrane bioreactor processes. Water Res. 274, 123155. [DOI: 10.1016/j.watres.2025.123155](https://doi.org/10.1016/j.watres.2025.123155)
 
+* Ryo Honda, Muhammad Sabar, Yuta Morinaga, Taichi Kani, Norihisa Matsuura, Toru Watanabe (2025) Global diversity and commonality of the antimicrobial resistome in activated sludge in wastewater treatment plants. Research Square. [https://doi.org/10.21203/rs.3.rs-6210263/v1](https://doi.org/10.21203/rs.3.rs-6210263/v1)
+
 ### METASUB
 (compatible with the old NIG supercomputer system running GridEngine as its job scheduler)
 * in preparation
