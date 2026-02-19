@@ -17,7 +17,7 @@ https://env.w3.kanazawa-u.ac.jp/end-amr-asia/
 Email: rhonda@staff.kanazawa-u.ac.jp (Dr. Ryo Honda)
 
 ### Acknowledgment
-END-AMR-Asia is supported by Kurita Water and Environment Foundation
+END-AMR-Asia is supported by Kurita Water and Environment Foundation (22T007).
 
 =======
 >>>>>>> 18561ae (first commit)
