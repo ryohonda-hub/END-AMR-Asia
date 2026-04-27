@@ -59,15 +59,19 @@ echo "[${DATE}] $JOB_NAME started. (${i}/${n})"
 
 ## make output directories if not existed
 mkdir -p ${DIR_FA}
-dir_tmp="${DIR_FA}/tmp"; mkdir -p ${dir_tmp}; trap 'rm -R ${dir_tmp}' 0
+dir_tmp="${DIR_FA}/tmp_${JOB_NAME}"; mkdir -p ${dir_tmp}; trap 'rm -R ${dir_tmp}' 0
 
 # Convert all fastq files into fasta format and save them in the tmp folder.
 for SAMPLE in "${LIST[@]}"; do
+	## unzip
+	# gzip -d ${DIR_QT}/${SAMPLE}${sfx_r1}
+	# gzip -d ${DIR_QT}/${SAMPLE}${sfx_r2}
 	## convert fastq to fasta
-	awk '(NR - 1) % 4 < 2' ${DIR_QT}/${SAMPLE}_R1.qt.fq | sed 's/@/>/' > ${dir_tmp}/${SAMPLE}_R1.fa
-	awk '(NR - 1) % 4 < 2' ${DIR_QT}/${SAMPLE}_R2.qt.fq | sed 's/@/>/' > ${dir_tmp}/${SAMPLE}_R2.fa
+	awk '(NR - 1) % 4 < 2' ${DIR_QT}/${SAMPLE}${sfx_r1} | sed 's/@/>/' > ${dir_tmp}/${SAMPLE}_R1.fa
+	awk '(NR - 1) % 4 < 2' ${DIR_QT}/${SAMPLE}${sfx_r2} | sed 's/@/>/' > ${dir_tmp}/${SAMPLE}_R2.fa
 	## concatenate two fasta files (R1&R2) into one fasta file (R12).
 	cat ${dir_tmp}/${SAMPLE}_R1.fa ${dir_tmp}/${SAMPLE}_R2.fa > ${DIR_FA}/${SAMPLE}_R12.fa
+	rm ${dir_tmp}/${SAMPLE}_R1.fa ${dir_tmp}/${SAMPLE}_R2.fa
 	## record the progress
 	DATE=$(date '+%Y-%m-%d %H:%M:%S %z')
 	i=`expr $i + 1`

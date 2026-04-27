@@ -76,7 +76,7 @@ echo "[${DATE}] $JOB_NAME started. (${i}/${n})"
 
 ## make output directories if not existed
 mkdir -p ${DIR_QT} ${DIR_FA}
-dir_tmp="${DIR_FA}/tmp"; mkdir -p ${dir_tmp}; trap 'rm -R ${dir_tmp}' 0
+dir_tmp="${DIR_FA}/tmp_${JOB_NAME}"; mkdir -p ${dir_tmp}; trap 'rm -R ${dir_tmp}' 0
 
 for SAMPLE in "${LIST[@]}"; do
 	## quality trimming by fastp
@@ -94,6 +94,7 @@ for SAMPLE in "${LIST[@]}"; do
 	awk '(NR - 1) % 4 < 2' ${DIR_QT}/${SAMPLE}_R2.qt.fq | sed 's/@/>/' > ${dir_tmp}/${SAMPLE}_R2.fa
 	## concatenate two fasta files (R1&R2) into one fasta file (R12).
 	cat ${dir_tmp}/${SAMPLE}_R1.fa ${dir_tmp}/${SAMPLE}_R2.fa > ${DIR_FA}/${SAMPLE}_R12.fa
+	rm ${dir_tmp}/${SAMPLE}_R1.fa ${dir_tmp}/${SAMPLE}_R2.fa
 	#gzip the filtered fastq file
 	#singularity exec /usr/local/biotools/p/pigz:2.3.4\
 	#pigz -p ${threads} ${DIR_QT}/${SAMPLE}_R1.qt.fq ${DIR_QT}/${SAMPLE}_R2.qt.fq 
