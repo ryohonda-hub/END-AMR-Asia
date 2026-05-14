@@ -1,5 +1,5 @@
 #========================================================================
-# curate_ARG_profile.py ver.2 / created by Ryo Honda, Last updated: 2025-04-23
+# curate_ARG_profile.py ver.2 / created by Ryo Honda, Last updated: 2026-05-14
 #========================================================================
 # This python script creates a profile comparison table of multiple samples by:
 #	$ python3 crtARG.py dir_in dir_out
@@ -54,6 +54,7 @@ def main(dir_in, dir_out):
         if os.path.isfile(os.path.join(dir_in,f)):
             print(f"'{f}' is found. The results will be output with sample names. ")
             dic_sample=pd.read_table(os.path.join(dir_in,f), header=None, index_col=0).squeeze(axis=1)
+            dic_sample.index = dic_sample.index.astype(str)
             # warn if any duplicated sample names
             duplicate_names = dic_sample[dic_sample.duplicated(keep=False)]
             if not duplicate_names.empty:

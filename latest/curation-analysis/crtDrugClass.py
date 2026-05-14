@@ -1,5 +1,5 @@
 #========================================================================
-# curate_drug_class.py / created by Ryo Honda, Last updated: 2025-04-22
+# curate_drug_class.py / created by Ryo Honda, Last updated: 2026-05-14
 #========================================================================
 # This python script creates a summary table of sequence reads by:
 #	$ python3 crtDrugClass.py summary_reads.csv dir_arg dir_out
@@ -43,6 +43,7 @@ def main(file_reads, dir_in, dir_out):
         if os.path.isfile(os.path.join(dir_in,f)):
             print(f"'{f}' is found. The results will be output with sample names. ")
             dic_sample=pd.read_table(os.path.join(dir_in,f), header=None, index_col=0).squeeze(axis=1)
+            dic_sample.index = dic_sample.index.astype(str)
             # warn if any duplicated sample names
             duplicate_names = dic_sample[dic_sample.duplicated(keep=False)]
             if not duplicate_names.empty:
